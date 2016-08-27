@@ -10,5 +10,21 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.14.0"
-  }
+  },
+  "directories": {
+    "test": "test"
+  },
+  "devDependencies": {
+    "mocha": "^3.0.2",
+    "chai": "^3.5.0",
+    "chai-http": "^3.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jberthiaume1138/comic-collector.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jberthiaume1138/comic-collector/issues"
+  },
+  "homepage": "https://github.com/jberthiaume1138/comic-collector#readme"
 }
