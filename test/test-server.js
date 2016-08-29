@@ -20,4 +20,44 @@ describe('Comic Collector', function() {
                 done();
             });
     });
+
+    it('should display the collection page on get', function(done) {
+        chai.request(app)
+            .get('/collection')
+            .end(function(error,response) {
+                response.should.have.status(200);
+                response.should.be.html;
+                done();
+            });
+    });
+
+    // it('should display the series page on get', function(done) {
+    //     chai.request(app)
+    //         .get('/series')
+    //         .end(function(error,response) {
+    //             response.should.have.status(200);
+    //             response.should.be.html;
+    //             done();
+    //         });
+    // });
+
+    it('should display the shopping page on get', function(done) {
+        chai.request(app)
+            .get('/shopping')
+            .end(function(error,response) {
+                response.should.have.status(200);
+                response.should.be.html;
+                done();
+            });
+    });
+
+    it('should display the search page on get', function(done) {
+        chai.request(app)
+            .get('/search')
+            .end(function(error,response) {
+                response.should.have.status(200);
+                response.should.be.html;
+                done();
+            });
+    });
 });
