@@ -12,6 +12,6 @@ deploy:
   provider: heroku
   api_key:
     secure: wgoOFd+HjKKf5UVMfbAOwne+j33Nva7hwxdNaKxicngeBDrDcWOMLBgHz4Oali48HxoChmI6KVS2XSqzGxgdSh7EXOktCTNbLchg4kDFmpSgnTtkmUT2jAwFwxxlQQkoaz+NJQKs4h3gzGIp/onifYQ853evk4n1cnCbc4RX1B+zwyeRSvYm1HVy+8xZiHUf9mZeuekiFs5bLfCUr5pnkf5gbZG5qcGftXy3ZJjvlDIG14D/EP7A+gGwfLDPVgr99GAyKDvurdr270NYKgkqfRhsOD+HhQA0KRDKLR3Koxuq1qDQZgVYUYROxF4lkhJKP67YikVLJRMiSKooBe24H8bE8tivEknZ8UuoVduok7euBjkprscbMboeN0hcm3ivnmxcfF7I51qRasylYUyUCCm5QtwbpY6zqj5HSp7zpz+Eim3tL7ZFTTfaaRQCXa69UVWmsKXgxjAe3K53Yt+/Uz5Zt7AHDmN8rVdrXrYU/7aE+tGmzBkqm35fLWt1Iq7LGCKbrG2Z/hVpxRJe+ayhd2P/nP8Lr+CvR0358yuCrAy4YUA+Pdw+O2ya4NVqDJr1zEXVR+yEvCq5WqAuzuFn2XTUATAKS8WwLbJq/wSCZvzg4rgS3RKCL/ppmcFwZQFAul0PWt4ucFt03TpK3cyilmy3j1N4jPbagJ8XmxX0/Zg=
-  app: comic-collector
+  app: radiant-peak-89382
   on:
     repo: jberthiaume1138/comic-collector
