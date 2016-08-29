@@ -15,7 +15,7 @@ app.get('/collection', function(request,response) {
     response.status(200);
 });
 
-app.get('/series', function(request,response) {
+app.get('/series/:id', function(request,response) {
     // response.send('Details for a series.');
     response.status(200);
 
@@ -29,21 +29,19 @@ app.get('/series', function(request,response) {
     console.log(hash);
 
     var url = 'http://gateway.marvel.com:80/v1/public/series/';
-    var seriesId = 20617;
+    var seriesId = request.params.id;
 
     var params = {  "apikey": pub,
                     "ts": ts,
                     "hash": hash
                 };
 
-    // unirest.get(url + seriesId + '/comics?ts=' + ts + 'apikey=' + pub + 'hash=' + hash)
     unirest.get(url + seriesId + '/comics')
             .qs(params)
             .end(function(data) {
                 console.log(data.body);
                 response.send(data.body);
             });
-
 });
 
 app.get('/shopping', function(request,response) {
