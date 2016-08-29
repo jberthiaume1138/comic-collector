@@ -8,3 +8,10 @@ addons:
     - mongodb-3.2-precise
     packages:
     - mongodb-org-server
+deploy:
+  provider: heroku
+  api_key:
+    secure: Q2I95LUMzmGJ5ZfFUp3C8+TpU8ODcRi9VOSGrY0ty66wcAqw+1CN5v6erVN8rCU2DqWI8Y7OF56a6lsb8qjCpI+HOhuYaKdWKQU/A9+u1Xca4T4sopwePooALGzHloT06hbka3T+OX5RUEr9+HCy8AdpS+TXEdRXcC1jgGyiWYtvCIzIV15KWJIenc3TiIaln0Qa2n/OevISdKJeYec5W93OVWtJzCD/RUV5U5V7KAVIrKBbfL252LCDjYFDAmHL5qAks18rq4qyLCXnfDZXh93z2giM6F5MzhtqAr5ZHsoVG6w7UftBBr1q+V51I7QLMKlgWnZqsS3gPIW1IKGY/dS4ZoujygpCLO82B3CXuPra2Ll09rbB/9pJj0Cv8pYFTI/lcaSqiFDO9xsomvGRi/Z1Yjr1OHcenkg4ust6VJRQzz3BeyBeaw1tsR5sKSnGowa9dkEHuCQS2qyG+52ETqdYHXiiyvoLeswpuysphRyoUfdfUo8go0DKoIA0p7ONN/thyhJ/z0ry1bSreuM7afR0Dvvh0mcdsfnzmfy7flT1V5Vjsm9d5fPKZ9qnexyPZ5wQ+LHx84RCViGAccikNH/+h+EyhNoAhxtGZbltX25yI23qa1oEvl9flclYkalcnQSOc4qMfxRKK/cp6Jnst3/WVAbEsjMtTs6aGqQjhOQ=
+  app: comic-collector
+  on:
+    repo: jberthiaume1138/comic-collector
