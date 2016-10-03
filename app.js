@@ -5,6 +5,12 @@ var crypto = require('crypto-js');
 
 var unirest = require('unirest');
 
+var util = require('util');
+
+if (!process.env.priv) {
+    var env = require('./env.js');
+}
+
 app.get('/', function(request, response) {
     response.send('Hello, everyone');
     response.status(200);
@@ -19,9 +25,6 @@ app.get('/series/:id', function(request,response) {
     // response.send('Details for a series.');
 
     response.status(200);
-
-    // var pub = '41ac4a2096f2416eb7cc039c19a371b3';
-    // var priv = '37b4c45a10b08d114e19400a278f8fb52b9d0f79';
 
     var pub = process.env.pub;
     var priv = process.env.priv;
@@ -61,5 +64,6 @@ app.get('/search', function(request,response) {
 // app.use(express.static('public'));
 
 app.listen(process.env.PORT || 8080);
+util.log("application started");
 
 exports.app = app;
