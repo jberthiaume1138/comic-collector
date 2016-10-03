@@ -17,11 +17,14 @@ app.get('/collection', function(request,response) {
 
 app.get('/series/:id', function(request,response) {
     // response.send('Details for a series.');
-    // comment here 
+
     response.status(200);
 
-    var pub = '41ac4a2096f2416eb7cc039c19a371b3';
-    var priv = '37b4c45a10b08d114e19400a278f8fb52b9d0f79';
+    // var pub = '41ac4a2096f2416eb7cc039c19a371b3';
+    // var priv = '37b4c45a10b08d114e19400a278f8fb52b9d0f79';
+
+    var pub = process.env.pub;
+    var priv = process.env.priv;
 
     var ts = new Date().getTime();
 
