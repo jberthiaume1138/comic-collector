@@ -5,9 +5,9 @@ var crypto = require('crypto-js');
 var unirest = require('unirest');
 var util = require('util');
 
-// if (!process.env.priv) {
-//     var env = require('./env.js');
-// }
+if (!process.env.priv) {
+    var env = require('./env.js');
+}
 
 app.get('/', function(request, response) {
     response.send('Hello, everyone on Heroku');
