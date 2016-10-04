@@ -2,14 +2,12 @@ var express = require('express');
 var app = express();
 
 var crypto = require('crypto-js');
-
 var unirest = require('unirest');
-
 var util = require('util');
 
-if (!process.env.priv) {
-    var env = require('./env.js');
-}
+// if (!process.env.priv) {
+//     var env = require('./env.js');
+// }
 
 app.get('/', function(request, response) {
     response.send('Hello, everyone on Heroku');
@@ -28,6 +26,9 @@ app.get('/series/:id', function(request,response) {
 
     var pub = process.env.pub;
     var priv = process.env.priv;
+
+    console.log(pub);
+    console.log(priv);
 
     var ts = new Date().getTime();
 
@@ -65,7 +66,5 @@ app.get('/search', function(request,response) {
 
 app.listen(process.env.PORT || 8080);
 util.log("application started");
-
-
 
 exports.app = app;
