@@ -20,21 +20,15 @@ app.get('/collection', function(request,response) {
 });
 
 app.get('/series/:id', function(request,response) {
-    // response.send('Details for a series.');
 
     response.status(200);
 
     var pub = process.env.pub;
     var priv = process.env.priv;
 
-    console.log(pub);
-    console.log(priv);
-
     var ts = new Date().getTime();
 
     var hash = crypto.MD5(ts + priv + pub).toString();
-
-    console.log(hash);
 
     var url = 'http://gateway.marvel.com:80/v1/public/series/';
     var seriesId = request.params.id;
