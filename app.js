@@ -56,12 +56,12 @@ app.get('/series/:id', function(req,res) {
 });
 
 app.get('/shopping', function(req,res) {
-    res.send('Shopping Trip');
+    res.render('shopping');
     res.status(200);
 });
 
 app.get('/search', function(req,res) {
-    res.send('Search for series here.');
+    res.render('search');
     res.status(200);
 });
 
