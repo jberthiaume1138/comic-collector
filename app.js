@@ -1,27 +1,36 @@
 var express = require('express');
 var app = express();
 
+var util = require('util');
+var path = require('path');
+
 var crypto = require('crypto-js');
 var unirest = require('unirest');
-var util = require('util');
 
 if (!process.env.priv) {
     var env = require('./env.js');
 }
 
-app.get('/', function(request, response) {
-    response.send('Hello, everyone on Heroku');
-    response.status(200);
+var staticPath = path.join(__dirname,'public');
+app.use(express.static(staticPath));
+
+var exphbs = require('express-handlebars');
+app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+app.set('view engine', 'handlebars');
+
+app.get('/', function(req, res) {
+    res.render('home');
+    res.status(200);
 });
 
-app.get('/collection', function(request,response) {
-    response.send('This is my collection.');
-    response.status(200);
+app.get('/collection', function(req, res) {
+    res.render('collection');
+    res.status(200);
 });
 
-app.get('/series/:id', function(request,response) {
+app.get('/series/:id', function(req,res) {
 
-    response.status(200);
+    res.status(200);
 
     var pub = process.env.pub;
     var priv = process.env.priv;
@@ -31,7 +40,7 @@ app.get('/series/:id', function(request,response) {
     var hash = crypto.MD5(ts + priv + pub).toString();
 
     var url = 'http://gateway.marvel.com:80/v1/public/series/';
-    var seriesId = request.params.id;
+    var seriesId = req.params.id;
 
     var params = {  "apikey": pub,
                     "ts": ts,
@@ -42,21 +51,19 @@ app.get('/series/:id', function(request,response) {
             .qs(params)
             .end(function(data) {
                 console.log(data.body);
-                response.send(data.body);
+                res.send(data.body);
             });
 });
 
-app.get('/shopping', function(request,response) {
-    response.send('Shopping Trip');
-    response.status(200);
+app.get('/shopping', function(req,res) {
+    res.send('Shopping Trip');
+    res.status(200);
 });
 
-app.get('/search', function(request,response) {
-    response.send('Search for series here.');
-    response.status(200);
+app.get('/search', function(req,res) {
+    res.send('Search for series here.');
+    res.status(200);
 });
-
-// app.use(express.static('public'));
 
 app.listen(process.env.PORT || 8080);
 util.log("application started");
