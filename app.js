@@ -47,11 +47,10 @@ app.get('/series/:id', function(req,res) {
     unirest.get(url + seriesId + '/comics')
             .qs(params)
             .end(function(data) {
+                res.render('series', data.body);
                 console.log(data.body);
-                res.send(data.body);
-                // console.log(data.body);
-                // res.render('series', data.body);
-                // res.status(200);
+                // res.json(data.body);
+                res.status(200);
             });
 });
 

@@ -1,5 +1,10 @@
-<div class="">
+<div class="wrapper">
     <p>
-    {{body}}
-</p>
+
+    {{#each data.results}}
+        <p>{{title}}</p>
+    {{/each}}
+    {{attributionText}}
+
+    </p>
 </div>
