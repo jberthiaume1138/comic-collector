@@ -42,7 +42,7 @@ describe('Comic Collector', function() {
 
     it('should display the shopping page on get', function(done) {
         chai.request(app)
-            .get('/shopping')
+            .get('/shop')
             .end(function(error,response) {
                 response.should.have.status(200);
                 response.should.be.html;
