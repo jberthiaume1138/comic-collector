@@ -55,8 +55,8 @@ app.get('/series/:id', function(req,res) {
             });
 });
 
-app.get('/shopping', function(req,res) {
-    res.render('shopping');
+app.get('/shop', function(req,res) {
+    res.render('shop');
     res.status(200);
 });
 

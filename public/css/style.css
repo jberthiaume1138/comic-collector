@@ -11,15 +11,19 @@ li {
 }
 
 body {
-    max-width: 1200px;
+
 }
 
 header {
     width: 100%;
     background-color: #D4D4D4;
+    position: fixed;
+    top: 0;
+    height: 52px;
 }
 
 #banner {
+    background-color: #D4D4D4;
     width: 100%;
     margin: 0 auto;
     padding: 0 1em;
@@ -37,7 +41,11 @@ header {
 }
 
 main {
-    height: 100vh;
+    padding-top: 52px;  /* how to avoid this */
+    padding-left: 1em;
+    padding-right: 1em;
+    margin: 0 auto;
+    max-width: 1200px;
     font-family: 'Open Sans', sans-serif;
 }
 
