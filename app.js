@@ -29,9 +29,6 @@ app.get('/collection', function(req, res) {
 });
 
 app.get('/series/:id', function(req,res) {
-
-    res.status(200);
-
     var pub = process.env.pub;
     var priv = process.env.priv;
 
@@ -52,6 +49,9 @@ app.get('/series/:id', function(req,res) {
             .end(function(data) {
                 console.log(data.body);
                 res.send(data.body);
+                // console.log(data.body);
+                // res.render('series', data.body);
+                // res.status(200);
             });
 });
 
@@ -66,6 +66,6 @@ app.get('/search', function(req,res) {
 });
 
 app.listen(process.env.PORT || 8080);
-util.log("application started");
+util.log("... application started ...");
 
 exports.app = app;
