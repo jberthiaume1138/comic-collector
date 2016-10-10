@@ -44,6 +44,7 @@ main {
     padding-top: 52px;  /* how to avoid this */
     padding-left: 1em;
     padding-right: 1em;
+    padding-bottom: 50px;
     margin: 0 auto;
     max-width: 1200px;
     font-family: 'Open Sans', sans-serif;

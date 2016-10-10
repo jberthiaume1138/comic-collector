@@ -7,13 +7,11 @@ $('document').ready(function() {
     //         console.log(data);
     //     });
 
-    var comicCollector = new comicCollector();
+    var comicCollector = new ComicCollector();
 
 
 
-    Handlebars.registerHelper('dateTimeFormat', function(date, format) {
-        return moment(date).format(format);
-    });
+
 });
 
 $('main').on('click','.button-need', function() {

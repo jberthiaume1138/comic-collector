@@ -10,7 +10,8 @@
                 </div>
                 <div class="issue-details">
                     id: {{id}}
-                    #{{issueNumber}}{{! #dateTimeFormat dates.0.date 'MM/DD/YYYY'}}{{!/dateTimeFormat}}
+                    #{{issueNumber}}
+                    {{#dateTimeFormat dates.0.date 'MM/DD/YYYY'}}{{/dateTimeFormat}}
                     {{#each creators.items}}
                         <p>{{name}}</p>
                     {{/each}}

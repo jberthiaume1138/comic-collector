@@ -8,8 +8,19 @@ var staticPath = path.join(__dirname,'public');
 
 app.use(express.static(staticPath));
 
+var moment = require('moment');
 var exphbs = require('express-handlebars');
-app.engine('handlebars', exphbs({defaultLayout: 'main'}));
+
+var hbs = exphbs.create({
+    helpers: {
+        dateTimeFormat: function(date, format) {
+            return moment(date).format(format);
+        }
+    },
+    defaultLayout: 'main'
+});
+
+app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
 var routes = require('./app_server/routes/routes');

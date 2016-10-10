@@ -1,7 +1,7 @@
 var chai = require('chai');
 var chaiHttp = require('chai-http');
 
-var server = require('../app.js');
+var server = require('../server.js');
 
 global.environment = 'test';
 
