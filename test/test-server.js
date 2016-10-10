@@ -14,9 +14,9 @@ describe('Comic Collector', function() {
     it('should display the home page on get', function(done) {
         chai.request(app)
             .get('/')
-            .end(function(error,response) {
-                response.should.have.status(200);
-                response.should.be.html;
+            .end(function(err,res) {
+                res.should.have.status(200);
+                res.should.be.html;
                 done();
             });
     });

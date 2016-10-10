@@ -26,4 +26,4 @@ app.use('*', function(req, res) {
 app.listen(process.env.PORT || 8080);
 util.log("... application started ...");
 
-module.exports = app;
+exports.app = app;
