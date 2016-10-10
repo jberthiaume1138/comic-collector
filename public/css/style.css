@@ -53,15 +53,19 @@ main {
 
 }
 
-#items {
+#series {
     display: flex;
     flex-flow: column;
     justify-content: space-around;
     align-items: center;
 }
 
-.item {
-    
+.series-issue {
+
+}
+
+#series h1 {
+    font-size: 1.3em;
 }
 
 footer {
