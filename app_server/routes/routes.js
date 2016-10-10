@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
+var items = require('../controllers/items');
+
 router.get('/', function(req, res) {
     res.render('home');
 });
@@ -8,6 +10,8 @@ router.get('/', function(req, res) {
 router.get('/collection', function(req, res) {
     res.render('collection');
 });
+
+router.get('/series/:id', items.renderSeries);
 
 router.get('/shop', function(req,res) {
     res.render('shop');

@@ -16,6 +16,7 @@ var routes = require('./app_server/routes/routes');
 var apiRoutes = require('./app_api/routes/items');
 
 app.use('/', routes);
+
 app.use('/api', apiRoutes);
 
 app.use('*', function(req, res) {

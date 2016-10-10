@@ -1,5 +1,5 @@
 $('document').ready(function() {
-    // $.getJSON('/series/20617')
+    // $.getJSON('/api/series/20617')
     //     .fail(function() {
     //         console.log('ERROR reading data!');
     //     })

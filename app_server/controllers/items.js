@@ -1,12 +1,7 @@
-var crypto = require('crypto-js');
 var unirest = require('unirest');
+var crypto = require('crypto-js');
 
-module.exports.collection = function(req, res) {
-    // gets a user's collection - ie a list of subscribed series
-    // this comes from the MongoDB
-};
-
-module.exports.seriesIssues = function(req, res) {
+module.exports.renderSeries = function(req, res) {
     // gets the complete run of a series from Marvel's API
     if (!process.env.priv) {
         var env = require('../../env.js');
@@ -30,6 +25,7 @@ module.exports.seriesIssues = function(req, res) {
     unirest.get(url + seriesId + '/comics')
             .qs(params)
             .end(function(data) {
-                res.json(data.body);
+                res.render('series', data.body);
             });
+
 };
