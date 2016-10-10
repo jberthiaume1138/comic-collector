@@ -53,8 +53,9 @@ describe('Comic Collector', function() {
 
     // this frequently fails due to time out - find a shorter/faster sample
     it('should display the series page on get', function(done) {
+        this.timeout(4000);
         chai.request(app)
-            .get('/api/series/20476')
+            .get('/api/series/20617')
             .end(function(error, res) {
                 res.should.have.status(200);
                 res.should.be.json;

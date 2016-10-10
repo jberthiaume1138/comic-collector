@@ -42,7 +42,7 @@ var ComicCollector = function() {
 
 };
 
-ComicCollector.prototype.updatedNeed = function(id) {\
+ComicCollector.prototype.updatedNeed = function(id) {
     // call /api/
 
 };

@@ -2,9 +2,9 @@
   "name": "comic-collector",
   "version": "1.0.0",
   "description": "A Node.js application to track your comic book collection and make trips to the comic book store easier.",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
-    "start": "node app.js",
+    "start": "node server.js",
     "test": "mocha"
   },
   "author": "JAB",
