@@ -3,8 +3,10 @@
 
     {{#each data.results}}
         <p>{{title}}</p>
+        <img src="{{thumbnail.path}}.{{thumbnail.extension}}" alt="" height="100"/>
     {{/each}}
-    {{attributionText}}
-
+    </p>
+    <p>
+        {{attributionText}}
     </p>
 </div>

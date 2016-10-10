@@ -25,7 +25,6 @@ app.get('/', function(req, res) {
 
 app.get('/collection', function(req, res) {
     res.render('collection');
-    res.status(200);
 });
 
 app.get('/series/:id', function(req,res) {
@@ -50,18 +49,16 @@ app.get('/series/:id', function(req,res) {
                 res.render('series', data.body);
                 console.log(data.body);
                 // res.json(data.body);
-                res.status(200);
+                // res.status(200);
             });
 });
 
 app.get('/shop', function(req,res) {
     res.render('shop');
-    res.status(200);
 });
 
 app.get('/search', function(req,res) {
     res.render('search');
-    res.status(200);
 });
 
 app.listen(process.env.PORT || 8080);
