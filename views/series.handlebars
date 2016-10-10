@@ -1,11 +1,14 @@
 <div class="wrapper">
-    <p>
-
-    {{#each data.results}}
-        <p>{{title}}</p>
-        <img src="{{thumbnail.path}}.{{thumbnail.extension}}" alt="" height="100"/>
-    {{/each}}
-    </p>
+    <div id="items">
+        <h1></h1>
+        {{#each data.results}}
+            {{series.name}}
+            #{{issueNumber}}
+            <a href="#">
+                <img src="{{thumbnail.path}}.{{thumbnail.extension}}" alt="" height="250"/>
+            </a>
+        {{/each}}
+    </div>
     <p>
         {{attributionText}}
     </p>
