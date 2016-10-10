@@ -6,16 +6,47 @@ $('document').ready(function() {
     //     .done(function(data) {
     //         console.log(data);
     //     });
-    $('main').on('click','.button-need', function() {
-        console.log('need clicked');
-        console.log(this);
-    });
 
-    $('main').on('click','.button-own', function() {
-        console.log('own clicked');
-    });
+    var comicCollector = new comicCollector();
+
+
 
     Handlebars.registerHelper('dateTimeFormat', function(date, format) {
         return moment(date).format(format);
     });
 });
+
+$('main').on('click','.button-need', function() {
+    console.log('need clicked');
+    console.log($(this).data('id'));
+
+    var id = $(this).data('id');
+
+    // fire function to call api_route which posts new item in user doc/needed issues
+    // passing issue ID
+    comicCollector.updatedNeed(id);
+});
+
+$('main').on('click','.button-own', function() {
+    console.log('own clicked');
+    console.log($(this).data('id'));
+
+    var id = $(this).data('id');
+
+    // fire function to call api_route which posts new item in user doc/owned issues
+    // passing issue ID
+    comicCollector.updateOwn(id);
+});
+
+var ComicCollector = function() {
+
+};
+
+ComicCollector.prototype.updatedNeed = function(id) {\
+    // call /api/
+
+};
+
+ComicCollector.prototype.updateOwn = function(id) {
+    // call /api/
+};

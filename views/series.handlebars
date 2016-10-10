@@ -2,25 +2,24 @@
     <div id="series">
         <h1>{{data.results.0.series.name}}</h1>
         {{#each data.results}}
-
-        <div class="series-issue">
-            <div class="issue-cover">
-                <a href="#">
-                    <img src="{{thumbnail.path}}.{{thumbnail.extension}}" alt="" height="250"/>
-                </a>
+            <div class="series-issue">
+                <div class="issue-cover">
+                    <a href="#">
+                        <img src="{{thumbnail.path}}.{{thumbnail.extension}}" alt="" height="250"/>
+                    </a>
+                </div>
+                <div class="issue-details">
+                    id: {{id}}
+                    #{{issueNumber}}{{! #dateTimeFormat dates.0.date 'MM/DD/YYYY'}}{{!/dateTimeFormat}}
+                    {{#each creators.items}}
+                        <p>{{name}}</p>
+                    {{/each}}
+                </div>
             </div>
-            <div class="issue-details">
-                id: {{id}}
-                #{{issueNumber}}{{! #dateTimeFormat dates.0.date 'MM/DD/YYYY'}}{{!/dateTimeFormat}}
-                {{#each creators.items}}
-                    <p>{{name}}</p>
-                {{/each}}
+            <div class="buttons">
+                <button class="button-need" data-id="{{id}}">Need</button>
+                <button class="button-own" data-id="{{id}}">Own</button>
             </div>
-        </div>
-        <div class="buttons">
-            <button class="button-need" type="button" name="button">Need</button>
-            <button class="button-own" type="button" name="button">Own</button>
-        </div>
         {{/each}}
     </div>
     <p>{{attributionText}}</p>
