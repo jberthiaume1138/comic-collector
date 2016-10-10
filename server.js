@@ -16,6 +16,12 @@ var hbs = exphbs.create({
         dateTimeFormat: function(date, format) {
             return moment(date).format(format);
         }
+        // filterDates: function(array, result, arg) {
+        //     result = array.filter(function() {
+        //
+        //     })
+        //     return result;
+        // }
     },
     defaultLayout: 'main'
 });

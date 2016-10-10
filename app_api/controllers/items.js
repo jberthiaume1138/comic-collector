@@ -8,9 +8,9 @@ module.exports.collection = function(req, res) {
 
 module.exports.seriesIssues = function(req, res) {
     // gets the complete run of a series from Marvel's API
-    if (!process.env.priv) {
-        var env = require('../../env.js');
-    }
+    // if (!process.env.priv) {
+    //     var env = require('../../env.js');
+    // }
 
     var pub = process.env.pub;
     var priv = process.env.priv;
