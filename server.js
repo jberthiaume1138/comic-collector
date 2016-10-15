@@ -15,13 +15,16 @@ var hbs = exphbs.create({
     helpers: {
         dateTimeFormat: function(date, format) {
             return moment(date).format(format);
+        },
+        filter: function(array, arg) {
+            var result = array.filter(function(item) {
+                // console.log(item);
+                if(item.type == arg) {
+                    console.log(item.date);
+                    return result;
+                }
+            });
         }
-        // filterDates: function(array, result, arg) {
-        //     result = array.filter(function() {
-        //
-        //     })
-        //     return result;
-        // }
     },
     defaultLayout: 'main'
 });

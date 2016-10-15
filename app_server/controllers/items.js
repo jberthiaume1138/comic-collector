@@ -3,9 +3,6 @@ var crypto = require('crypto-js');
 
 module.exports.renderSeries = function(req, res) {
     // gets the complete run of a series from Marvel's API
-    if (!process.env.priv) {
-        var env = require('../../env.js');
-    }
 
     var pub = process.env.pub;
     var priv = process.env.priv;

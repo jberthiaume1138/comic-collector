@@ -15,6 +15,12 @@
                     {{#each creators.items}}
                         <p>{{name}}</p>
                     {{/each}}
+                    <p>On Sale: {{#filter dates 'onsaleDate'}}
+                                    {{#each result}}
+                                        {{date}}
+                                    {{/each}}
+                                {{/filter}}
+                    </p>
                 </div>
             </div>
             <div class="buttons">
