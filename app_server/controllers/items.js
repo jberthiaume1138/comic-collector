@@ -27,5 +27,5 @@ module.exports.renderSeries = function(req, res) {
 };
 
 module.exports.renderCollection = function(req, res) {
-    // get a user's collection from the database
+    // get a user's collection from the application database
 };
