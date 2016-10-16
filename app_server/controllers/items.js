@@ -24,5 +24,8 @@ module.exports.renderSeries = function(req, res) {
             .end(function(data) {
                 res.render('series', data.body);
             });
+};
 
+module.exports.renderCollection = function(req, res) {
+    // get a user's collection from the database
 };

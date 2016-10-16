@@ -1,12 +1,15 @@
+var bodyParser = require('body-parser');
 var express = require('express');
 var app = express();
 
 var util = require('util');
 var path = require('path');
 
-var staticPath = path.join(__dirname,'public');
+app.use(bodyParser.json());
 
+var staticPath = path.join(__dirname,'public');
 app.use(express.static(staticPath));
+
 
 var moment = require('moment');
 var exphbs = require('express-handlebars');
@@ -18,7 +21,6 @@ var hbs = exphbs.create({
         },
         filter: function(array, arg) {
             var result = array.filter(function(item) {
-                // console.log(item);
                 if(item.type == arg) {
                     console.log(item.date);
                     return result;

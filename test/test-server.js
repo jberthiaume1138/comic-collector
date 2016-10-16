@@ -51,7 +51,6 @@ describe('Comic Collector', function() {
             });
     });
 
-    // this frequently fails due to time out - find a shorter/faster sample
     it('should display the series page on get', function(done) {
         this.timeout(4000);
         chai.request(app)
@@ -59,7 +58,23 @@ describe('Comic Collector', function() {
             .end(function(error, res) {
                 res.should.have.status(200);
                 res.should.be.json;
+                res.body.should.be.a('object');
+                res.body.should.have.property('data');
+                res.body.data.should.have.property('results');
+                res.body.data.results.should.be.a('array');
+                res.body.data.results[0].should.have.property('id');
+                res.body.data.results[0].id.should.equal(56159);
                 done();
             });
     });
+
+    // it('should display the user collection on get', function(done) {
+    //     chai.request(app)
+    //         .get('/api/collection')     //add dummy user data param
+    //         .end(function(error, res) {
+    //             res.should.have.status(200);
+    //             res.should.be.json;
+    //             .done();
+    //         });
+    // });
 });
