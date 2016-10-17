@@ -10,6 +10,8 @@ app.use(bodyParser.json());
 var staticPath = path.join(__dirname,'public');
 app.use(express.static(staticPath));
 
+var viewsPath = path.join(__dirname,'app_server','views');
+app.set('views', viewsPath);
 
 var moment = require('moment');
 var exphbs = require('express-handlebars');
@@ -28,6 +30,8 @@ var hbs = exphbs.create({
             });
         }
     },
+    layoutsDir: viewsPath + '/layouts',
+    partialsDir: viewsPath + '/partials',
     defaultLayout: 'main'
 });
 

@@ -11,8 +11,9 @@ var app = server.app;
 chai.use(chaiHttp);
 
 describe('Comic Collector', function() {
-    
+
     describe('Application', function() {
+        
         it('should display the home page on get', function(done) {
             chai.request(app)
                 .get('/')
