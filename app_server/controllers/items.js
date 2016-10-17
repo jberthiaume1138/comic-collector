@@ -26,10 +26,17 @@ module.exports.renderSeries = function(req, res) {
     //         });
 
     // **** temp hard coding data for a series ****
+    // **** remove the below and un comment everything above ***
     var logan = require('../data/logan.json');
     res.render('series', logan);
 };
 
 module.exports.renderCollection = function(req, res) {
     // get a user's collection from the application database
+
+    // AJAX to MongoDB for the user's data
+    // var user = req.params.userid;
+    // etc
+    var homer = require('../data/homer.json');
+    res.render('collection' , homer);
 };

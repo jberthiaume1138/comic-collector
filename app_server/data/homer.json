@@ -1,0 +1,26 @@
+{
+    "username": "homer",
+    "password": "donuts",
+    "firstName": "Homer",
+    "lastName": "Simpson",
+    "subscriptions": [
+        {
+            "seriesid": 20167,
+            "title": "Old Man Logan",
+            "startDate" : "2016-01-27T00:00:00-0500",
+            "inProgress": true
+        },
+        {
+            "seriesid": 19711,
+            "title": "Han Solo",
+            "startDate" : "2016-06-15T00:00:00-0400",
+            "inProgress": false
+        },
+        {
+            "seriesid": 20476,
+            "title": "Invincible Iron Man",
+            "startDate" : "2015-12-02T00:00:00-0500",
+            "inProgress": true
+        }
+    ]
+}
