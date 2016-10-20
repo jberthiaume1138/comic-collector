@@ -23,9 +23,11 @@
     "test": "test"
   },
   "devDependencies": {
-    "mocha": "^3.0.2",
     "chai": "^3.5.0",
-    "chai-http": "^3.0.0"
+    "chai-http": "^3.0.0",
+    "gulp": "^3.9.1",
+    "gulp-sass": "^2.3.2",
+    "mocha": "^3.0.2"
   },
   "repository": {
     "type": "git",
