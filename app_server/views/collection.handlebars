@@ -1,12 +1,14 @@
 <div id="wrapper">
     <div id="collection" class="">
-        <h1>Excellsior, {{firstName}}</h1>
+        <h1>Excellsior, {{firstname}}</h1>
 
         <div><h2>Your subscriptions:</h2></div>
         <div>
         <ul>
         {{#each subscriptions}}
-            <li>{{title}}</li>
+            <li>
+                <a href="/series/{{seriesid}}">{{title}}</a>
+            </li>
         {{/each}}
     </div>
     </div>
