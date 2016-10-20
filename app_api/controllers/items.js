@@ -1,5 +1,6 @@
 var crypto = require('crypto-js');
 var unirest = require('unirest');
+var model = require('../db/models/user')
 
 module.exports.collection = function(req, res) {
     // gets a user's collection - ie a list of subscribed series

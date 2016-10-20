@@ -34,9 +34,8 @@ var UserSchema = new mongoose.Schema({
     lastname: {
         type: String
     },
-    subscriptions: {
+    subscriptions:
         [SubscriptionSchema]
-    }
 });
 
 var User = mongoose.model('User', UserSchema);
