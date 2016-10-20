@@ -2,6 +2,8 @@ var bodyParser = require('body-parser');
 var express = require('express');
 var app = express();
 
+require('./app_api/db/models/connect');
+
 var util = require('util');
 var path = require('path');
 
