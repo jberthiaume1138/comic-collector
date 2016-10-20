@@ -2,7 +2,7 @@ var mongoose = require('mongoose');
 
 var SubscriptionSchema = new mongoose.Schema({
     seriesid: {
-        type: String,
+        type: Number,
         required: true
     },
     title: {
@@ -29,6 +29,9 @@ var UserSchema = new mongoose.Schema({
         required: true
     },
     firstname: {
+        type: String
+    },
+    lastname: {
         type: String
     },
     subscriptions: {
