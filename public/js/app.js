@@ -48,3 +48,7 @@ ComicCollector.prototype.updatedNeed = function(id) {
 ComicCollector.prototype.updateOwn = function(id) {
     // call /api/
 };
+
+ComicCollector.prototype.searchMarvel = function() {
+        // search Marvel's API 
+};
