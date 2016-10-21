@@ -2,33 +2,34 @@ $('document').ready(function() {
     var comicCollector = new ComicCollector();
 });
 
-$('main').on('click','.button-need', function() {
-    console.log('need clicked');
-    console.log($(this).data('id'));
-
-    var id = $(this).data('id');
-
-    // fire function to call api_route which posts new item in user doc/needed issues
-    // passing issue ID
-    comicCollector.updatedNeed(id);
-});
-
-$('main').on('click','.button-own', function() {
-    console.log('own clicked');
-    console.log($(this).data('id'));
-
-    var id = $(this).data('id');
-
-    // fire function to call api_route which posts new item in user doc/owned issues
-    // passing issue ID
-    comicCollector.updateOwn(id);
-});
-
 var ComicCollector = function() {
     this.inputSearch = $('#input-search');
     this.searchButton = $('#button-search');
     this.inputSearch.keydown(this.onInputSearchKeydown.bind(this));
     this.searchButton.on('click', this.onSearchButtonClicked.bind(this));
+    this.main = $('main');
+    this.main.on('click','.button-need', this.onButtonNeedClicked.bind(this));
+    this.main = $('main');
+    this.main.on('click','.button-own', this.onButtonOwnClicked.bind(this));
+};
+
+ComicCollector.prototype.onButtonNeedClicked = function() {
+    console.log('Need clicked');
+
+    console.log($(this).parent().find('.series-issue').data('id'));
+
+    // console.log(this);
+    // var id = $(this).data('id');
+
+    // fire function to call api_route which posts new item in user doc/needed issues
+    // passing issue ID
+    // this.updatedNeed(seriesid);
+};
+
+ComicCollector.prototype.onButtonOwnClicked = function() {
+    console.log('Own clicked');
+
+    // this.updateOwn(seriesid);
 };
 
 ComicCollector.prototype.onInputSearchKeydown = function(event) {
@@ -44,10 +45,13 @@ ComicCollector.prototype.onSearchButtonClicked = function() {
 
 ComicCollector.prototype.updatedNeed = function(seriesid) {
     // call /api/
+    console.log(seriesid);
 };
 
 ComicCollector.prototype.updateOwn = function(seriesid) {
     // call /api/
+
+    console.log(seriesid);
 };
 
 ComicCollector.prototype.getSeries = function(seriesid) {
@@ -62,26 +66,5 @@ ComicCollector.prototype.getSeries = function(seriesid) {
 
 ComicCollector.prototype.searchMarvel = function(searchTerms) {
     // search Marvel's API
-    console.log(searchTerms);
 
-    // don't want this in the client side files --- this needs to be moved
-    var pub = '';
-    var priv = '';
-
-    var ts = new Date().getTime();
-
-    var hash = crypto.MD5(ts + priv + pub).toString();
-
-    var url = 'http://gateway.marvel.com:80/v1/public/series/';
-    var seriesId = req.params.id;
-
-    var params = {  "apikey": pub,
-                    "ts": ts,
-                    "hash": hash
-                };
-
-    $.getJSON(url, params)
-        .done(function(data) {
-            console.log(data);
-        });
 };

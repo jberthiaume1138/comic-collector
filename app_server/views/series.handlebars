@@ -1,8 +1,8 @@
-<div class="wrapper">
+
     <div id="series">
         <h1>{{data.results.0.series.name}}</h1>
         {{#each data.results}}
-            <div class="series-issue">
+            <div class="series-issue" data-id="{{id}}">
                 <div class="issue-cover">
                     <a href="#">
                         <img src="{{thumbnail.path}}.{{thumbnail.extension}}" alt="" height="250"/>
@@ -22,12 +22,10 @@
                                 {{/filter}}
                     </p>
                 </div>
-            </div>
-            <div class="buttons">
                 <button class="button-need" data-id="{{id}}">Need</button>
                 <button class="button-own" data-id="{{id}}">Own</button>
             </div>
+
         {{/each}}
     </div>
     <p>{{attributionText}}</p>
-</div>
