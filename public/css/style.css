@@ -20,7 +20,7 @@ header {
   text-align: center;
   vertical-align: middle;
   /* Typography */
-  font-family: 'Amatic SC', cursive;
+  font-family: "Amatic SC", cursive;
   font-size: 2.5em;
   font-weight: 700; }
 
@@ -67,3 +67,9 @@ footer {
 
 #series h1 {
   font-size: 1.3em; }
+
+#search {
+  margin: 0 auto;
+  text-align: center; }
+  #search p {
+    font-size: 0.75em; }

@@ -14,6 +14,8 @@ body {
 
 }
 
+$prettyFonts: 'Amatic SC', cursive;
+
 header {
     background-color: #D4D4D4;
     width: 100%;
@@ -28,7 +30,7 @@ header {
     text-align: center;
     vertical-align: middle;
     /* Typography */
-    font-family: 'Amatic SC', cursive;
+    font-family: $prettyFonts;
     font-size: 2.5em;
     font-weight: 700;
 }
@@ -91,4 +93,14 @@ footer {
 
 #series h1 {
     font-size: 1.3em;
+}
+
+// ------------------------ search page styling ---------------------//
+#search {
+    margin: 0 auto;
+    text-align: center;
+
+    p {
+        font-size: 0.75em;
+    }
 }

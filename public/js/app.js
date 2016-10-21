@@ -1,17 +1,5 @@
 $('document').ready(function() {
-    // $.getJSON('/api/series/20617')
-    //     .fail(function() {
-    //         console.log('ERROR reading data!');
-    //     })
-    //     .done(function(data) {
-    //         console.log(data);
-    //     });
-
     var comicCollector = new ComicCollector();
-
-
-
-
 });
 
 $('main').on('click','.button-need', function() {
@@ -37,18 +25,63 @@ $('main').on('click','.button-own', function() {
 });
 
 var ComicCollector = function() {
-
+    this.inputSearch = $('#input-search');
+    this.searchButton = $('#button-search');
+    this.inputSearch.keydown(this.onInputSearchKeydown.bind(this));
+    this.searchButton.on('click', this.onSearchButtonClicked.bind(this));
 };
 
-ComicCollector.prototype.updatedNeed = function(id) {
+ComicCollector.prototype.onInputSearchKeydown = function(event) {
+    if (event.keyCode == 13 ) {
+        this.searchMarvel(this.inputSearch.val().trim());
+    }
+};
+
+ComicCollector.prototype.onSearchButtonClicked = function() {
+    var searchTerms = this.inputSearch.val().trim();
+    this.searchMarvel(searchTerms);
+};
+
+ComicCollector.prototype.updatedNeed = function(seriesid) {
     // call /api/
-
 };
 
-ComicCollector.prototype.updateOwn = function(id) {
+ComicCollector.prototype.updateOwn = function(seriesid) {
     // call /api/
 };
 
-ComicCollector.prototype.searchMarvel = function() {
-        // search Marvel's API 
+ComicCollector.prototype.getSeries = function(seriesid) {
+    // $.getJSON('/api/series/20617')
+    //     .fail(function() {
+    //         console.log('ERROR reading data!');
+    //     })
+    //     .done(function(data) {
+    //         console.log(data);
+    //     });
+};
+
+ComicCollector.prototype.searchMarvel = function(searchTerms) {
+    // search Marvel's API
+    console.log(searchTerms);
+
+    // don't want this in the client side files --- this needs to be moved
+    var pub = '';
+    var priv = '';
+
+    var ts = new Date().getTime();
+
+    var hash = crypto.MD5(ts + priv + pub).toString();
+
+    var url = 'http://gateway.marvel.com:80/v1/public/series/';
+    var seriesId = req.params.id;
+
+    var params = {  "apikey": pub,
+                    "ts": ts,
+                    "hash": hash
+                };
+
+    $.getJSON(url, params)
+        .done(function(data) {
+            console.log(data);
+        });
 };
