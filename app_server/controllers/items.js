@@ -1,15 +1,16 @@
 var unirest = require('unirest');
 var crypto = require('crypto-js');
 
+var pub = process.env.pub;
+var priv = process.env.priv;
+
+var ts = new Date().getTime();
+
+var hash = crypto.MD5(ts + priv + pub).toString();
+
+
 module.exports.renderSeries = function(req, res) {
     // gets the complete run of a series from Marvel's API
-
-    var pub = process.env.pub;
-    var priv = process.env.priv;
-
-    var ts = new Date().getTime();
-
-    var hash = crypto.MD5(ts + priv + pub).toString();
 
     var url = 'http://gateway.marvel.com:80/v1/public/series/';
     var seriesId = req.params.id;
@@ -34,9 +35,29 @@ module.exports.renderSeries = function(req, res) {
 module.exports.renderCollection = function(req, res) {
     // get a user's collection from the application database
 
-    // AJAX to MongoDB for the user's data
+    // AJAX call to API exposing MongoDB for the user's data
     // var user = req.params.userid;
     // etc
     var homer = require('../data/homer.json');
-    res.render('collection' , homer);
+    res.render('collection', homer);
+};
+
+module.exports.renderSearchResults = function(req, res) {
+    // get search renderSearchResults
+    var url = 'http://gateway.marvel.com:80/v1/public/series?titleStartsWith=';
+
+    var query = req.params.query;
+
+    var params = {  "apikey": pub,
+                    "ts": ts,
+                    "hash": hash
+                };
+
+    unirest.get(url + query + '&apikey=' + pub)
+            .qs(params)
+            .end(function(data) {
+                res.render('search', data.body);
+                // res.json(data.body);
+            });
+
 };

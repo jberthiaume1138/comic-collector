@@ -43,6 +43,12 @@ ComicCollector.prototype.onSearchButtonClicked = function() {
     this.searchMarvel(searchTerms);
 };
 
+ComicCollector.prototype.searchMarvel = function(searchTerms) {
+    // search Marvel's API
+
+    //redirect? need to go to /search/searchTerms
+};
+
 ComicCollector.prototype.updatedNeed = function(seriesid) {
     // call /api/
     console.log(seriesid);
@@ -62,9 +68,4 @@ ComicCollector.prototype.getSeries = function(seriesid) {
     //     .done(function(data) {
     //         console.log(data);
     //     });
-};
-
-ComicCollector.prototype.searchMarvel = function(searchTerms) {
-    // search Marvel's API
-
 };
