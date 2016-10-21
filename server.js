@@ -26,10 +26,11 @@ var hbs = exphbs.create({
         filter: function(array, arg) {
             var result = array.filter(function(item) {
                 if(item.type == arg) {
-                    console.log(item.date);
-                    return result;
+                    return item.date;
                 }
             });
+            console.log(result);
+            return result[0].date;
         }
     },
     layoutsDir: viewsPath + '/layouts',

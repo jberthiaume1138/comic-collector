@@ -15,11 +15,7 @@
                     {{#each creators.items}}
                         <p>{{name}}</p>
                     {{/each}}
-                    <p>On Sale: {{#filter dates 'onsaleDate'}}
-                                    {{#each result}}
-                                        {{date}}
-                                    {{/each}}
-                                {{/filter}}
+                    <p>On Sale: {{#dateTimeFormat dates.0.date 'MM/DD/YYYY'}}{{#filter dates 'onsaleDate'}}{{/filter}}{{/dateTimeFormat}}
                     </p>
                 </div>
                 <button class="button-need" data-id="{{id}}">Need</button>
