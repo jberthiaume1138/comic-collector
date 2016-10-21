@@ -18,27 +18,6 @@ var ComicCollector = function() {
     });
 };
 
-// ComicCollector.prototype.onButtonNeedClicked = function() {
-//     console.log('Need clicked');
-//     console.log($(this).data('id'));
-//     console.log(this);
-//
-//     // console.log($(this).parent().find('.series-issue').data('id'));
-//
-//     // console.log(this);
-//     // var id = $(this).data('id');
-//
-//     // fire function to call api_route which posts new item in user doc/needed issues
-//     // passing issue ID
-//     // this.updatedNeed(seriesid);
-// };
-
-ComicCollector.prototype.onButtonOwnClicked = function() {
-    console.log('Own clicked');
-
-    // this.updateOwn(seriesid);
-};
-
 ComicCollector.prototype.onInputSearchKeydown = function(event) {
     if (event.keyCode == 13 ) {
         this.searchMarvel(this.inputSearch.val().trim());
@@ -59,7 +38,6 @@ ComicCollector.prototype.searchMarvel = function(searchTerms) {
     //     gets the json
 
     console.log(searchTerms);
-
 };
 
 ComicCollector.prototype.updateNeed = function(seriesid) {
@@ -69,7 +47,6 @@ ComicCollector.prototype.updateNeed = function(seriesid) {
 
 ComicCollector.prototype.updateOwn = function(seriesid) {
     // call /api/
-
     console.log(seriesid);
 };
 
