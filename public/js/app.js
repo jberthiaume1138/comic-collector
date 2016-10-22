@@ -31,13 +31,13 @@ ComicCollector.prototype.onSearchButtonClicked = function() {
 
 ComicCollector.prototype.searchMarvel = function(searchTerms) {
     // search Marvel's API
-
-    //redirect? need to go to /search/searchTerms
-    // getJSON('/api/search')
-    //     pass the string
-    //     gets the json
-
-    console.log(searchTerms);
+    $.getJSON('/api/search/' + searchTerms)
+        .fail(function() {
+            console.log('ERROR searching');
+        })
+        .done(function(data) {
+            console.log(data);
+        });
 };
 
 ComicCollector.prototype.updateNeed = function(seriesid) {
