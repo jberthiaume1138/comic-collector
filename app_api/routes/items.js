@@ -5,7 +5,7 @@ var items = require('../controllers/items');
 
 router.get('/series/:id', items.seriesIssues);
 
-
+router.get('/search/:query', items.searchMarvel);
 
 router.get('/subscriptions', function(req,res) {
     // get the user's collection of

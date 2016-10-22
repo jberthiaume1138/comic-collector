@@ -41,23 +41,3 @@ module.exports.renderCollection = function(req, res) {
     var homer = require('../data/homer.json');
     res.render('collection', homer);
 };
-
-module.exports.renderSearchResults = function(req, res) {
-    // get search renderSearchResults
-    var url = 'http://gateway.marvel.com:80/v1/public/series?titleStartsWith=';
-
-    var query = req.params.query;
-
-    var params = {  "apikey": pub,
-                    "ts": ts,
-                    "hash": hash
-                };
-
-    unirest.get(url + query + '&apikey=' + pub)
-            .qs(params)
-            .end(function(data) {
-                res.render('search', data.body);
-                // res.json(data.body);
-            });
-
-};
