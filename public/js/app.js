@@ -8,6 +8,8 @@ var ComicCollector = function() {
     this.searchButton = $('#button-search');
     this.inputSearch.keydown(this.onInputSearchKeydown.bind(this));
     this.searchButton.on('click', this.onSearchButtonClicked.bind(this));
+    this.template = Handlebars.compile($('#search-results-template').html());
+    this.$searchResultsDiv = $('#results');
     self.main = $('main');
     self.main.on('click','.button-need', function() {
         self.updateNeed($(this).data('id'));
@@ -31,12 +33,19 @@ ComicCollector.prototype.onSearchButtonClicked = function() {
 
 ComicCollector.prototype.searchMarvel = function(searchTerms) {
     // search Marvel's API
+    var self = this;
     $.getJSON('/api/search/' + searchTerms)
         .fail(function() {
             console.log('ERROR searching');
+            // show some kind of user message that search failed
         })
         .done(function(data) {
             console.log(data);
+            console.log(self);
+            var html = $(self.template(data));
+            console.log(html);
+            // var html = $(this.searchTemplate(data));
+            self.$searchResultsDiv.html(html);
         });
 };
 

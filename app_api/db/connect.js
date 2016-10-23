@@ -1,7 +1,20 @@
 var mongoose = require('mongoose');
 var dbURI = 'mongodb://localhost/comic-collector';
 
+// SIGINT emulation for Windows
+var readLine = require ('readline');
+if (process.platorm === 'win32') {
+    var rl = readLine.createInterface ({
+        input: process.stdin,
+        output: process.stdout
+    });
+    rl.on('SIGINT', function () {
+        process.emit ('SIGINT');
+    });
+}
+
 // add logic to handle production DB
+//
 
 mongoose.connect(dbURI);
 
@@ -16,9 +29,10 @@ mongoose.connection.on('disconnected', function() {
     console.log('Mongoose disconnected');
 });
 
+var gracefulShutdown;
 // CAPTURE APP TERMINATION / RESTART EVENTS
 // To be called when process is restarted or terminated
-var gracefulShutdown = function(msg, callback) {
+gracefulShutdown = function(msg, callback) {
     mongoose.connection.close(function() {
         console.log('Mongoose disconnected through ' + msg);
         callback();
