@@ -8,7 +8,8 @@ var ComicCollector = function() {
     this.searchButton = $('#button-search');
     this.inputSearch.keydown(this.onInputSearchKeydown.bind(this));
     this.searchButton.on('click', this.onSearchButtonClicked.bind(this));
-    this.template = Handlebars.compile($('#search-results-template').html());
+    // this.template = Handlebars.compile($('#search-results-template').html());
+    this.$searchTemplate = $('#search-results-template').html();
     this.$searchResultsDiv = $('#results');
     self.main = $('main');
     self.main.on('click','.button-need', function() {
@@ -18,6 +19,17 @@ var ComicCollector = function() {
     self.main.on('click','.button-own', function() {
         self.updateOwn($(this).data('id'));
     });
+};
+
+ComicCollector.prototype.renderData = function(data, template, target) {
+    console.log(data);
+    console.log(template);
+    console.log(target);
+
+    var compiledTemplate = Handlebars.compile(template);
+    var html = compiledTemplate(data);
+
+    target.html(html);
 };
 
 ComicCollector.prototype.onInputSearchKeydown = function(event) {
@@ -40,12 +52,7 @@ ComicCollector.prototype.searchMarvel = function(searchTerms) {
             // show some kind of user message that search failed
         })
         .done(function(data) {
-            console.log(data);
-            console.log(self);
-            var html = $(self.template(data));
-            console.log(html);
-            // var html = $(this.searchTemplate(data));
-            self.$searchResultsDiv.html(html);
+            self.renderData(data, self.$searchTemplate, self.$searchResultsDiv);
         });
 };
 
