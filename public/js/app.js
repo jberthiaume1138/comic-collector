@@ -1,4 +1,15 @@
 $('document').ready(function() {
+
+
+    //
+    // var context = {name: "Daryl", weapon: "crossbow"};
+    // var compiledTemplate = Handlebars.templates['searchResults'];
+    // var html = compiledTemplate(context);
+    //
+    // $('#results').html(html);
+
+
+
     var comicCollector = new ComicCollector();
 });
 
@@ -8,8 +19,7 @@ var ComicCollector = function() {
     this.searchButton = $('#button-search');
     this.inputSearch.keydown(this.onInputSearchKeydown.bind(this));
     this.searchButton.on('click', this.onSearchButtonClicked.bind(this));
-    // this.template = Handlebars.compile($('#search-results-template').html());
-    this.$searchTemplate = $('#search-results-template').html();
+    this.$searchTemplate = $('#search-results-template');
     this.$searchResultsDiv = $('#results');
     self.main = $('main');
     self.main.on('click','.button-need', function() {
@@ -22,14 +32,31 @@ var ComicCollector = function() {
 };
 
 ComicCollector.prototype.renderData = function(data, template, target) {
-    console.log(data);
-    console.log(template);
-    console.log(target);
+    // console.log(data);
+    // console.log(template);
+    // console.log(target);
+    //
+    // var compiledTemplate = Handlebars.compile(template.html());
+    // console.log(compiledTemplate);
+    // var html = compiledTemplate(data);
+    //
+    // target.html(html);
+    //
+    // var compiledTemplate = Handlebars.templates['searchResults'];
+    // var context = {name: "Daryl", weapon: "crossbow"};
+    //
+    // var html = compiledTemplate(context);
+    // // console.log(html);
+    //
+    // // $('#results').html('Thing goes here');
+    // $('#results').html(html);
 
-    var compiledTemplate = Handlebars.compile(template);
-    var html = compiledTemplate(data);
+    // var context = {name: "Daryl", weapon: "crossbow"};
+    var context = data;
+    var compiledTemplate = Handlebars.templates['searchResults'];
+    var html = compiledTemplate(context);
 
-    target.html(html);
+    $('#results').html(html);
 };
 
 ComicCollector.prototype.onInputSearchKeydown = function(event) {
@@ -49,7 +76,7 @@ ComicCollector.prototype.searchMarvel = function(searchTerms) {
     $.getJSON('/api/search/' + searchTerms)
         .fail(function() {
             console.log('ERROR searching');
-            // show some kind of user message that search failed
+            //TODO: show some kind of user message that search failed
         })
         .done(function(data) {
             self.renderData(data, self.$searchTemplate, self.$searchResultsDiv);

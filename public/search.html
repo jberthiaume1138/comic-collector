@@ -13,18 +13,30 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.15.0/moment.min.js"></script>
-    <script type="text/javascript" src="/js/templates.js"></script>
 
 </head>
 
 <body>
-    {{>header}}
+    <div>
+        <div id="search">
+            <h2>Search for a new series</h2>
+            <input id="input-search" type="text" autofocus="autofocus" title="Enter a series title or partial title.">
+            <button id="button-search">Search</button>
+            <p>You can search with any or all of a series title.</p>
+            <p>EX: "Amazing Spiderman" or "Old Man Lo"</p>
+        </div>
 
-    <main>
-        {{{ body }}}
-    </main>
+        <div id="results">
+        </div>
+    </div>
 
-    {{>footer}}
+
+    <!-- Handlebars templates -->
+    <script id="search-template" type="text/x-handlebars-template">
+        <h3>Search Results</h3>
+        {{name}} carries a  {{weapon}}
+
+    </script>
 
     <script type="text/javascript" src="/js/app.js"></script>
 </body>

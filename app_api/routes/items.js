@@ -7,8 +7,13 @@ router.get('/series/:id', items.seriesIssues);
 
 router.get('/search/:query', items.searchMarvel);
 
-router.get('/subscriptions', function(req,res) {
-    // get the user's collection of
+router.get('/subscriptions', function(req, res) {
+    // get the user's collection of subscriptions
+    // Item.list(function(items) {
+    //     res.status(200).json(items);
+    // }, function(err) {
+    //     res.status(400).json(err);
+    // });
 });
 
 router.post('/subscriptions/:id', function(req, res) {

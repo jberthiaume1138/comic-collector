@@ -12,6 +12,7 @@ var hash = crypto.MD5(ts + priv + pub).toString();
 module.exports.collection = function(req, res) {
     // gets a user's collection - ie a list of subscribed series
     // this comes from the MongoDB
+    
 };
 
 module.exports.seriesIssues = function(req, res) {
