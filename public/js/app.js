@@ -34,24 +34,7 @@ var ComicCollector = function() {
 ComicCollector.prototype.renderData = function(data, template, target) {
     // console.log(data);
     // console.log(template);
-    // console.log(target);
-    //
-    // var compiledTemplate = Handlebars.compile(template.html());
-    // console.log(compiledTemplate);
-    // var html = compiledTemplate(data);
-    //
-    // target.html(html);
-    //
-    // var compiledTemplate = Handlebars.templates['searchResults'];
-    // var context = {name: "Daryl", weapon: "crossbow"};
-    //
-    // var html = compiledTemplate(context);
-    // // console.log(html);
-    //
-    // // $('#results').html('Thing goes here');
-    // $('#results').html(html);
 
-    // var context = {name: "Daryl", weapon: "crossbow"};
     var context = data;
     var compiledTemplate = Handlebars.templates['searchResults'];
     var html = compiledTemplate(context);
