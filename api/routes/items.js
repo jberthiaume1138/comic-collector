@@ -9,7 +9,7 @@ router.get('/search/:query', items.searchMarvel);
 
 router.get('/users', items.registeredUsers);
 
-router.get('/subscriptions/:id', function(req, res) {
+router.get('/user/:id/subscriptions', function(req, res) {
     // get the user's collection of subscriptions
     Item.list(function(items) {
         res.status(200).json(items);

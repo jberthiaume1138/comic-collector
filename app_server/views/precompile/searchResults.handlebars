@@ -1,5 +1,4 @@
 <h3>Search Results</h3>
-{{data.attributionText}}
 {{#each data.results}}
     <div class="series">
         <h2>{{title}}</h2>
@@ -7,14 +6,11 @@
             <img src="{{thumbnail.path}}.jpg" alt="{{title}}-image" height="150"/>
         </a>
         <div class="series-detail">
-            <p>
-                Available issues: {{comics.available}}
-            </p>
-            <p>
-                Type: {{type}}
-            </p>
+            <p>Started in {{startYear}}</p>
+            <p>Available issues: {{comics.available}}</p>
+            <p>Type: {{type}} </p>
         </div>
     </div>
 
-    
+
 {{/each}}

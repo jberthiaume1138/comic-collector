@@ -1,0 +1,26 @@
+{
+    "username": "monty",
+    "password": "nuclear",
+    "firstname": "Montgomery",
+    "lastname": "Burns",
+    "subscriptions": [
+        {
+            "seriesid": 19242,
+            "title": "Star Wars",
+            "startyear": 2015,
+            "inprogress": true
+        },
+        {
+            "seriesid": 20613,
+            "title": "Deadpool",
+            "startdate": 2015,
+            "inprogress": true
+        },
+        {
+            "seriesid": 20457,
+            "title": "Doctor Strange",
+            "startdate": 2015,
+            "inprogress": true
+        },
+    ]
+}
