@@ -8,6 +8,29 @@ var ts = new Date().getTime();
 
 var hash = crypto.MD5(ts + priv + pub).toString();
 
+var request = require('request');
+var baseURL = 'http://localhost:8080'; // add logic for dev/prod env
+
+module.exports.renderAdmin = function(req, res) {
+    // gets the list of registered users and their collections
+    var requestOptions = {
+        url: baseURL + '/api/users',
+        method: 'GET',
+        json: {}
+    };
+    request(requestOptions, function(err, response, body) {
+        if(err) {
+            console.log(err);
+        }
+        else if(response.statusCode === 200) {
+            console.log(body);
+            res.render('admin', body);
+        }
+        else {
+            console.log(response.statusCode);
+        }
+    });
+};
 
 module.exports.renderSeries = function(req, res) {
     // gets the complete run of a series from Marvel's API

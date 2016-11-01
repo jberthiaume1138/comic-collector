@@ -1,6 +1,6 @@
 var crypto = require('crypto-js');
 var unirest = require('unirest');
-var model = require('../db/models/user')
+var user = require('../db/models/user')
 
 var pub = process.env.pub;
 var priv = process.env.priv;
@@ -9,10 +9,23 @@ var ts = new Date().getTime();
 
 var hash = crypto.MD5(ts + priv + pub).toString();
 
-module.exports.collection = function(req, res) {
+module.exports.registeredUsers = function(req, res) {
+    // gets a list of all the registered users
+    user.find(function(err, users) {
+        if (err) {
+            res.json({err: "ERROR"});
+            return;
+        }
+        res.json(users);
+    });
+};
+
+module.exports.collection = function(id, callback, errback) {
     // gets a user's collection - ie a list of subscribed series
     // this comes from the MongoDB
-    
+    user.find(function(err, items) {
+        callback(items);
+    });
 };
 
 module.exports.seriesIssues = function(req, res) {

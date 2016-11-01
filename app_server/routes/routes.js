@@ -15,8 +15,12 @@ router.get('/search', function(req,res) {
     res.render('search');
 });
 
-router.get('/shop', function(req,res) {
+router.get('/shop', function(req, res) {
     res.render('shop');
 });
+
+router.get('/admin', items.renderAdmin);
+
+
 
 module.exports = router;

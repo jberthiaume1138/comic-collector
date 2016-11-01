@@ -1,0 +1,13 @@
+<div>
+    <h2>Users Headline</h2>
+    {{#each this}}
+        {{username}} {{firstname}} {{lastname}}
+        <h3>Subscriptions</h3>
+        {{#each subscriptions}}
+            <p>
+                {{title}}
+            </p>
+        {{/each}}
+        <h4>End User</h4>
+    {{/each}}
+</div>
