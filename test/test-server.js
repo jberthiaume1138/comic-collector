@@ -13,7 +13,7 @@ chai.use(chaiHttp);
 describe('Comic Collector', function() {
 
     describe('Application', function() {
-        
+
         it('should display the home page on get', function(done) {
             chai.request(app)
                 .get('/')
@@ -72,15 +72,45 @@ describe('Comic Collector', function() {
                     done();
                 });
         });
-    });
 
-    // it('should display the user collection on get', function(done) {
-    //     chai.request(app)
-    //         .get('/api/collection/PARAM')     //add dummy user data param
-    //         .end(function(error, res) {
-    //             res.should.have.status(200);
-    //             res.should.be.json;
-    //             .done();
-    //         });
-    // });
+        it('should display the user collection on GET', function(done) {
+            chai.request(app)
+                .get('/api/collection/homer')       // verify dummy user data parameter
+                .end(function(error, res) {
+                    res.should.have.status(200);
+                    res.should.be.json;
+                    done();
+                });
+        });
+
+        it('should add a new item to the user collection on POST', function(done) {
+            chai.request(app)
+                .post('/api/collection/homer')      // insert parameters...
+                .end(function(error, res) {
+                    res.should.have.status(200);
+                    res.should.be.json;
+                    done();
+                });
+        });
+
+        it('should edit an item in the user collection on PUT', function(done) {
+            chai.request(app)
+                .put('/api/collection/homer')      // insert parameters...
+                .end(function(error, res) {
+                    res.should.have.status(200);
+                    res.should.be.json;
+                    done();
+                });
+        });
+
+        it('should delete an item from the collection on DELETE', function(done) {
+            chai.request(app)
+                .delete('/api/collection/homer')      // insert parameters...
+                .end(function(error, res) {
+                    res.should.have.status(200);
+                    res.should.be.json;
+                    done();
+                });
+        });
+    });
 });

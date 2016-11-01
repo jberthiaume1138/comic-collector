@@ -1,4 +1,4 @@
-require('./app_api/db/connect');
+require('./api/db/connect');
 
 var express = require('express');
 var app = express();
@@ -42,7 +42,7 @@ app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
 
 var routes = require('./app_server/routes/routes');
-var apiRoutes = require('./app_api/routes/items');
+var apiRoutes = require('./api/routes/items');
 
 app.use('/', routes);
 
