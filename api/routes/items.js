@@ -7,16 +7,11 @@ router.get('/series/:id', items.seriesIssues);
 
 router.get('/search/:query', items.searchMarvel);
 
-router.get('/users', items.registeredUsers);
+router.get('/users', items.registeredUsers);    //admin only route
 
-router.get('/user/:id/subscriptions', function(req, res) {
-    // get the user's collection of subscriptions
-    Item.list(function(items) {
-        res.status(200).json(items);
-    }, function(err) {
-        res.status(400).json(err);
-    });
-});
+router.get('/users/:id', items.usersReadOne);
+
+// router.get('/users/:id/subscriptions', items.subscriptions);
 
 router.post('/subscriptions/:id', function(req, res) {
     // add a new item to a user's subscriptions

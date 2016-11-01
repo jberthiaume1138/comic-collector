@@ -20,17 +20,25 @@ module.exports.registeredUsers = function(req, res) {
     });
 };
 
-module.exports.collection = function(id, callback, errback) {
-    // gets a user's collection - ie a list of subscribed series
-    // this comes from the MongoDB
-    user.find(function(err, items) {
-        callback(items);
+module.exports.usersReadOne = function(req, res) {
+    // gets a complete user object
+    var id = req.params.id;
+    user.findById({_id: id}, function(err, item) {
+        res.json(item);
     });
+
 };
+
+// module.exports.subscriptions = function(id, req, res) {
+//     // gets a user's subscriptions
+//     res.json({_id: id});
+//     // user.findOne({_id: id}, function(err, item) {
+//     //     callback(item);
+//     // });
+// };
 
 module.exports.seriesIssues = function(req, res) {
     // gets the complete run of a series from Marvel's API
-
 
     var url = 'http://gateway.marvel.com:80/v1/public/series/';
     var seriesId = req.params.id;

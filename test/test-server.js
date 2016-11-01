@@ -73,9 +73,9 @@ describe('Comic Collector', function() {
                 });
         });
 
-        it('should display the user collection on GET', function(done) {
+        it('should display the user subscriptions on GET', function(done) {
             chai.request(app)
-                .get('/api/collection/homer')       // verify dummy user data parameter
+                .get('/api/subscriptions/homer')       // verify dummy user data parameter
                 .end(function(error, res) {
                     res.should.have.status(200);
                     res.should.be.json;
@@ -83,9 +83,9 @@ describe('Comic Collector', function() {
                 });
         });
 
-        it('should add a new item to the user collection on POST', function(done) {
+        it('should add a new item to the user subscriptions on POST', function(done) {
             chai.request(app)
-                .post('/api/collection/homer')      // insert parameters...
+                .post('/api/subscriptions/homer')      // insert parameters...
                 .end(function(error, res) {
                     res.should.have.status(200);
                     res.should.be.json;
@@ -93,9 +93,9 @@ describe('Comic Collector', function() {
                 });
         });
 
-        it('should edit an item in the user collection on PUT', function(done) {
+        it('should edit an item in the user subscriptions on PUT', function(done) {
             chai.request(app)
-                .put('/api/collection/homer')      // insert parameters...
+                .put('/api/subscriptions/homer')      // insert parameters...
                 .end(function(error, res) {
                     res.should.have.status(200);
                     res.should.be.json;
@@ -103,9 +103,9 @@ describe('Comic Collector', function() {
                 });
         });
 
-        it('should delete an item from the collection on DELETE', function(done) {
+        it('should delete an item from the subscriptions on DELETE', function(done) {
             chai.request(app)
-                .delete('/api/collection/homer')      // insert parameters...
+                .delete('/api/subscriptions/homer')      // insert parameters...
                 .end(function(error, res) {
                     res.should.have.status(200);
                     res.should.be.json;
