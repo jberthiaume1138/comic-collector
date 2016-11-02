@@ -28,7 +28,7 @@
     "chai": "^3.5.0",
     "chai-http": "^3.0.0",
     "gulp": "^3.9.1",
-    "gulp-handlebars": "^4.0.0",
+    "gulp-exec": "^2.1.2",
     "gulp-sass": "^2.3.2",
     "mocha": "^3.0.2"
   },

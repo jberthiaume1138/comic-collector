@@ -13,17 +13,18 @@ router.get('/users/:id', items.usersReadOne);
 
 // router.get('/users/:id/subscriptions', items.subscriptions);
 
-router.post('/subscriptions/:id', function(req, res) {
+router.post('/users/:id/subscriptions/', function(req, res) {
     // add a new item to a user's subscriptions
     res.status(201).json({items: "new item"});
 });
 
-router.put('/subscriptions/:id', function(req, res) {
-    // edit an item in a user's subscriptions
-    res.status(200).json({items: "updated"});
-});
+// // probably not needed
+// router.put('/subscriptions/:id', function(req, res) {
+//     // edit an item in a user's subscriptions
+//     res.status(200).json({items: "updated"});
+// });
 
-router.delete('/subscriptions/:id', function(req, res) {
+router.delete('/users/:id/subscriptions/:id', function(req, res) {
     // delete an item in a user's subscriptions
     res.status(200).json({items: "deleted"});
 });

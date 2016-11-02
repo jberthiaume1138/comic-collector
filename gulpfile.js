@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
+var exec = require('gulp-exec');
 
 gulp.task('compile-styles', function() {
     gulp.src('./public/sass/**/*.scss')
@@ -7,15 +8,12 @@ gulp.task('compile-styles', function() {
         .pipe(gulp.dest('./public/css/'));
 });
 
-// var handlebars = require('gulp-handlebars');
-//
-// gulp.task('compile-handlebars', function() {
-//     gulp.src('./app_server/views/precompile/*.handlebars')
-//         .pipe(handlebars())
-//         .pipe(gulp.dest('./public/js/templates.js'))
-// });
+gulp.task('precompile-handlebars', function() {
+    gulp.src('./app_server/views/precompile/*.handlebars')
+        .pipe(exec('handlebars ./app_server/views/precompile -f ./public/js/templates.js'));
+});
 
 gulp.task('default', function() {
     gulp.watch('./public/sass/**/*.scss',['compile-styles']);
-    // gulp.watch('./app_server/views/precompile/*.handlebars',['compile-handlebars'])
+    gulp.watch('./app_server/views/precompile/*.handlebars',['precompile-handlebars']);
 });

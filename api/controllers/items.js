@@ -26,15 +26,14 @@ module.exports.usersReadOne = function(req, res) {
     user.findById({_id: id}, function(err, item) {
         res.json(item);
     });
-
 };
 
-// module.exports.subscriptions = function(id, req, res) {
+// module.exports.subscriptions = function(req, res) {
 //     // gets a user's subscriptions
-//     res.json({_id: id});
-//     // user.findOne({_id: id}, function(err, item) {
-//     //     callback(item);
-//     // });
+//     var id = req.params.id;
+//     user.find({_id: id}, function(err, item) {
+//         res.json(item.subscriptions);
+//     });
 // };
 
 module.exports.seriesIssues = function(req, res) {
