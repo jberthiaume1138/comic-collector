@@ -26,7 +26,7 @@ describe('Comic Collector', function() {
 
         it('should display the collection page on get', function(done) {
             chai.request(app)
-                .get('/collection')
+                .get('/collection/580eeb996b3612c3eba80cda')
                 .end(function(error, response) {
                     response.should.have.status(200);
                     response.should.be.html;
@@ -79,6 +79,8 @@ describe('Comic Collector', function() {
                 .end(function(error, res) {
                     res.should.have.status(200);
                     res.should.be.json;
+                    res.body.should.have.property('username');
+                    res.body.username.should.equal('homer');
                     done();
                 });
         });

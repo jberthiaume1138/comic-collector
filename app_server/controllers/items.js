@@ -57,10 +57,23 @@ module.exports.renderSeries = function(req, res) {
 
 module.exports.renderCollection = function(req, res) {
     // get a user's collection from the application database
+    var user = req.params.id;
 
-    // AJAX call to API exposing MongoDB for the user's data
-    // var user = req.params.userid;
-    // etc
-    var homer = require('../data/homer.json');
-    res.render('collection', homer);
+    var requestOptions = {
+        url: baseURL + '/api/users/' + user,
+        method: 'GET',
+        json: {}
+    };
+
+    request(requestOptions, function(err, response, body) {
+        if(err) {
+            console.log(err);
+        }
+        else if(response.statusCode === 200) {
+            res.render('collection', body);
+        }
+        else {
+            console.log(response.statusCode);
+        }
+    });
 };
