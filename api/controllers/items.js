@@ -9,6 +9,11 @@ var ts = new Date().getTime();
 
 var hash = crypto.MD5(ts + priv + pub).toString();
 
+var sendJSONResponse = function(res, status, content) {
+    res.status(status);
+    res.send(content);
+};
+
 module.exports.usersList = function(req, res) {
     // gets a list of all the registered users
     user.find(function(err, users) {
@@ -20,6 +25,11 @@ module.exports.usersList = function(req, res) {
     });
 };
 
+module.exports.usersCreate = function(req, res) {
+    // create a new user
+    sendJSONResponse(res, 201, {"status": "ADDED"});
+};
+
 module.exports.usersReadOne = function(req, res) {
     // gets a complete user object
     var id = req.params.id;
@@ -27,6 +37,46 @@ module.exports.usersReadOne = function(req, res) {
         res.json(item);
     });
 };
+
+module.exports.usersUpdateOne = function(req, res) {
+    // update a user
+    sendJSONResponse(res, 200, {"status": "UPDATED"});
+};
+
+module.exports.usersDeleteOne = function(req, res) {
+    // delete a user
+    sendJSONResponse(res, 204, {"status": "REMOVED"});
+};
+
+// ---------
+
+module.exports.subscriptionsList = function(req, res) {
+    // list all of a users subscriptions
+    sendJSONResponse(res, 200, {"status": "OK"});
+};
+
+module.exports.subscriptionsCreate = function(req, res) {
+    // create a new subscription for a user
+    sendJSONResponse(res, 201, {"status": "ADDED"});
+};
+
+module.exports.subscriptionsReadOne = function(req, res) {
+    // read a single subscription from a user
+    sendJSONResponse(res, 200, {"status": "OK"});
+};
+
+module.exports.subscriptionsUpdateOne = function(req, res) {
+    // update a single subscription
+    sendJSONResponse(res, 200, {"status": "UPDATED"});
+};
+
+module.exports.subscriptionsDeleteOne = function(req, res) {
+    // delete a single subscription
+    sendJSONResponse(res, 204, {"status": "REMOVED"});
+};
+
+
+
 
 // module.exports.subscriptions = function(req, res) {
 //     // gets a user's subscriptions
