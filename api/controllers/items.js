@@ -9,7 +9,7 @@ var ts = new Date().getTime();
 
 var hash = crypto.MD5(ts + priv + pub).toString();
 
-module.exports.registeredUsers = function(req, res) {
+module.exports.usersList = function(req, res) {
     // gets a list of all the registered users
     user.find(function(err, users) {
         if (err) {
