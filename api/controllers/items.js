@@ -1,6 +1,7 @@
 var crypto = require('crypto-js');
 var unirest = require('unirest');
 var user = require('../db/models/user')
+// var subscription = require('../db/models/subscription');
 
 var pub = process.env.pub;
 var priv = process.env.priv;
@@ -16,26 +17,67 @@ var sendJSONResponse = function(res, status, content) {
 
 module.exports.usersList = function(req, res) {
     // gets a list of all the registered users
-    user.find(function(err, users) {
-        if (err) {
-            res.json({err: "ERROR"});
-            return;
-        }
-        res.json(users);
-    });
+
+    // user.find(function(err, users) {
+    //     if (err) {
+    //         res.json({err: "ERROR"});
+    //         return;
+    //     }
+    //     res.json(users);
+    // });
+
+    // re-write using promises...exec() returns promise
+    user.find()
+        .exec()
+        .then(function(users) {
+            sendJSONResponse(res, 200, users);
+        })
+        .catch(function(err) {
+            console.log(err);
+        });
 };
 
 module.exports.usersCreate = function(req, res) {
     // create a new user
     sendJSONResponse(res, 201, {"status": "ADDED"});
+
+    var promise = new Promise(function(resolve, reject) {
+        resolve(user.create({username: 'jon'}, function(err, item) {
+            console.log('Added', item);
+        }));
+    });
+
+    promise.then(function(result) {
+        sendJSONResponse(res, 201, result);
+    }, function(err) {
+        console.log('Failed!', err);
+    });
 };
 
 module.exports.usersReadOne = function(req, res) {
     // gets a complete user object
-    var id = req.params.id;
-    user.findById({_id: id}, function(err, item) {
-        res.json(item);
-    });
+    // if(req.params.id) {
+    //     user.findById({_id: req.params.id}, function(err, item) {
+    //         res.json(item);
+    //     });
+    // } else {
+    //     sendJSONResponse(res, 400, {'message': 'No ID provided in request'});
+    // }
+
+    if(req.params.id) {
+        user.findById(req.params.id)
+            .exec()
+            .then(function(users) {
+                sendJSONResponse(res, 200, users);
+            })
+            .catch(function(err) {
+                console.log(err);
+                sendJSONResponse(res, 400, {'ERROR!': 'User ID not found'});
+            });
+    }
+    else {
+        sendJSONResponse(res, 400, {'ERROR!': 'No ID provided'});
+    }
 };
 
 module.exports.usersUpdateOne = function(req, res) {
@@ -53,13 +95,17 @@ module.exports.usersDeleteOne = function(req, res) {
 module.exports.subscriptionsList = function(req, res) {
     // list all of a users subscriptions
     var promise = new Promise(function(resolve, reject) {
-        user.findById(req.params.id, function(err, data) {
-            if(!err) {
-                resolve(data);
-            } else {
-                reject(err);
-            }
-        }).select('subscriptions');
+        if(req.params) {
+            user.findById(req.params.id, function(err, data) {
+                if(!err) {
+                    resolve(data);
+                } else {
+                    reject(err);
+                }
+            }).select('subscriptions');
+        } else {
+            sendJSONResponse(res, 400, {'message': 'No ID provided in request'});
+        }
     });
 
     promise.then(function(result) {
@@ -80,11 +126,44 @@ module.exports.subscriptionsList = function(req, res) {
 module.exports.subscriptionsCreate = function(req, res) {
     // create a new subscription for a user
     sendJSONResponse(res, 201, {"status": "ADDED"});
+    //
+    // if(req.params.id) {}
+    //     var promise = new Promise(function(resolve, reject) {
+    //         user.findById(req.params.id, function(err, data) {
+    //             subscription.save
+    //         });
+    //     });
+    // }
+    // else {
+    //     sendJSONResponse(res, 400, {'message': 'No ID provided in request'});
+    // }
 };
 
 module.exports.subscriptionsReadOne = function(req, res) {
     // read a single subscription from a user
-    sendJSONResponse(res, 200, {"status": "OK"});
+
+    // if(req.params.id && req.params.subscriptionid) {
+    //     var promise = new Promise(function(resolve, reject) {
+    //         user.findById(req.params.id, function(err, data) {
+    //             if(!err) {
+    //                 resolve(data.seriesid(req.params.subscriptionid));
+    //             } else {
+    //                 reject(err);
+    //             }
+    //         }).select('subscriptions');
+    //     });
+    //
+    //     promise.then(function(result) {
+    //         sendJSONResponse(res, 200, result.subscriptions);
+    //     }, function(err) {
+    //         console.log('Failed!', err);
+    //     });
+    // }
+    // else {
+    //     sendJSONResponse(res, 400, {'message': 'No ID provided in request'});
+    // }
+
+
 };
 
 module.exports.subscriptionsUpdateOne = function(req, res) {

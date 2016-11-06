@@ -38,6 +38,8 @@ var UserSchema = new mongoose.Schema({
         [SubscriptionSchema]
 });
 
-var User = mongoose.model('User', UserSchema);
+var Subscription = mongoose.model('Subscription' , SubscriptionSchema);
+module.exportrs = Subscription;
 
+var User = mongoose.model('User', UserSchema);
 module.exports = User;

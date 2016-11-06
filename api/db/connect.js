@@ -16,6 +16,7 @@ if (process.platorm === 'win32') {
 // add logic to handle production DB
 //
 
+mongoose.Promise = global.Promise;
 mongoose.connect(dbURI);
 
 // CONNECTION EVENTS
