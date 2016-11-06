@@ -16,7 +16,7 @@ router.delete('/users/:id', items.usersDeleteOne);
 
 router.get('/users/:id/subscriptions', items.subscriptionsList);    //tested
 router.post('/users/:id/subscriptions', items.subscriptionsCreate);
-router.get('/users/:id/subscriptions/:subscriptionid', items.subscriptionsReadOne);
+router.get('/users/:id/subscriptions/:subscriptionid', items.subscriptionsReadOne);     //tested
 router.put('/users/:id/subscriptions/:subscriptionid', items.subscriptionsUpdateOne);
 router.delete('/users/:id/subscriptions/:subscriptionid', items.subscriptionsDeleteOne);
 
