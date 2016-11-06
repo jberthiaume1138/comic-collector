@@ -52,7 +52,12 @@ module.exports.usersDeleteOne = function(req, res) {
 
 module.exports.subscriptionsList = function(req, res) {
     // list all of a users subscriptions
-    sendJSONResponse(res, 200, {"status": "OK"});
+    user
+        .findById(req.params.id)
+        .select('subscriptions')
+        .exec(function(err, data) {
+            sendJSONResponse(res, 200, data.subscriptions);
+        });
 };
 
 module.exports.subscriptionsCreate = function(req, res) {
