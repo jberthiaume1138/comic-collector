@@ -52,12 +52,29 @@ module.exports.usersDeleteOne = function(req, res) {
 
 module.exports.subscriptionsList = function(req, res) {
     // list all of a users subscriptions
-    user
-        .findById(req.params.id)
-        .select('subscriptions')
-        .exec(function(err, data) {
-            sendJSONResponse(res, 200, data.subscriptions);
-        });
+    var promise = new Promise(function(resolve, reject) {
+        user.findById(req.params.id, function(err, data) {
+            if(!err) {
+                resolve(data);
+            } else {
+                reject(err);
+            }
+        }).select('subscriptions');
+    });
+
+    promise.then(function(result) {
+        sendJSONResponse(res, 200, result.subscriptions);
+    }, function(err) {
+        console.log('Failed!', err);
+    });
+
+    // this works
+    // user
+    //     .findById(req.params.id)
+    //     .select('subscriptions')
+    //     .exec(function(err, data) {
+    //         sendJSONResponse(res, 200, data.subscriptions);
+    //     });
 };
 
 module.exports.subscriptionsCreate = function(req, res) {
