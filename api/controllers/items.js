@@ -136,7 +136,6 @@ module.exports.subscriptionsList = function(req, res) {
 
 module.exports.subscriptionsCreate = function(req, res) {
     // create a new subscription for a user
-
     var newSub = {
                     seriesid: 123456,
                     title: 'The Walking Dead'
@@ -150,7 +149,7 @@ module.exports.subscriptionsCreate = function(req, res) {
         .then(function(thisUser) {
             thisUser.save(function(err, newUser) {
                 if(err) {
-                    console.log(err);
+                    return(err);
                 }
                 else {
                     sendJSONResponse(res, 201, newUser);
