@@ -9,8 +9,8 @@ var SubscriptionSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    startdate: {
-        type: Date
+    startyear: {
+        type: Number
     },
     inprogress: {
         type: Boolean,

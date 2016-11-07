@@ -27,8 +27,7 @@ module.exports.usersList = function(req, res) {
     // });
 
     // re-write using promises...exec() returns promise
-    user.find()
-        .exec()
+    user.find().exec()
         .then(function(users) {
             sendJSONResponse(res, 200, users);
         })
@@ -39,23 +38,46 @@ module.exports.usersList = function(req, res) {
 
 module.exports.usersCreate = function(req, res) {
     // create a new user
-    sendJSONResponse(res, 201, {"status": "ADDED"});
 
-    var promise = new Promise(function(resolve, reject) {
-        resolve(user.create({username: 'jon'}, function(err, item) {
-            console.log('Added', item);
-        }));
-    });
+    var dataToSave = {
+                        username: "homer",
+                        password: "donuts",
+                        firstname: "Homer",
+                        lastname: "Simpson",
+                        subscriptions: [
+            {
+                seriesid: 20617,
+                title: 'Old Man Logan',
+                startyear: 2016,
+                inprogress: true
+            },
+            {
+                seriesid: 19711,
+                title: "Han Solo",
+                startyear : 2016,
+                inprogress: false
+            },
+            {
+                seriesid: 20476,
+                title: "Invincible Iron Man",
+                startyear : 2015,
+                inprogress: true
+            }
+        ]
+                    };
 
-    promise.then(function(result) {
-        sendJSONResponse(res, 201, result);
-    }, function(err) {
-        console.log('Failed!', err);
-    });
+    user.create(dataToSave)
+        .then(function(data) {
+            sendJSONResponse(res, 201, data);
+        })
+        .catch(function(err) {
+            console.log(err);
+        });
 };
 
 module.exports.usersReadOne = function(req, res) {
     // gets a complete user object
+
     // if(req.params.id) {
     //     user.findById({_id: req.params.id}, function(err, item) {
     //         res.json(item);
@@ -64,9 +86,8 @@ module.exports.usersReadOne = function(req, res) {
     //     sendJSONResponse(res, 400, {'message': 'No ID provided in request'});
     // }
 
-    if(req.params.id) {
-        user.findById(req.params.id)
-            .exec()
+    if(req.params.userid) {
+        user.findById(req.params.userid).exec()
             .then(function(users) {
                 sendJSONResponse(res, 200, users);
             })
@@ -82,12 +103,31 @@ module.exports.usersReadOne = function(req, res) {
 
 module.exports.usersUpdateOne = function(req, res) {
     // update a user
-    sendJSONResponse(res, 200, {"status": "UPDATED"});
+    var userID = req.params.userid;
+    var updateData = {
+                        password: "beer",
+                    };
+
+    user.findOneAndUpdate({_id: userID}, updateData)
+        .then(function(data) {
+            sendJSONResponse(res, 200, {message: 'UPDATED'});
+        })
+        .catch(function(err) {
+            console.log(err);
+        });
 };
 
 module.exports.usersDeleteOne = function(req, res) {
     // delete a user
-    sendJSONResponse(res, 204, {"status": "REMOVED"});
+    var userID = req.params.userid;
+
+    user.findOneAndRemove({_id: userID})
+        .then(function(data) {
+            sendJSONResponse(res, 200, {'message':'Removed' + userID});
+        })
+        .catch(function(err) {
+            console.log(err);
+        });
 };
 
 // ---------
@@ -96,7 +136,7 @@ module.exports.subscriptionsList = function(req, res) {
     // list all of a users subscriptions
     var promise = new Promise(function(resolve, reject) {
         if(req.params) {
-            user.findById(req.params.id, function(err, data) {
+            user.findById(req.params.userid, function(err, data) {
                 if(!err) {
                     resolve(data);
                 } else {

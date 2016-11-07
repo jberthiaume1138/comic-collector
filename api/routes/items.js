@@ -10,14 +10,14 @@ router.get('/search/:query', items.searchMarvel);
 router.get('/users', items.usersList);      //admin only    //tested
 router.post('/users', items.usersCreate);   //admin only
 
-router.get('/users/:id', items.usersReadOne);   //tested
-router.put('/users/:id', items.usersUpdateOne);
-router.delete('/users/:id', items.usersDeleteOne);
+router.get('/users/:userid', items.usersReadOne);   //tested
+router.put('/users/:userid', items.usersUpdateOne);
+router.delete('/users/:userid', items.usersDeleteOne);
 
-router.get('/users/:id/subscriptions', items.subscriptionsList);    //tested
-router.post('/users/:id/subscriptions', items.subscriptionsCreate);
-router.get('/users/:id/subscriptions/:subscriptionid', items.subscriptionsReadOne);     //tested
-router.put('/users/:id/subscriptions/:subscriptionid', items.subscriptionsUpdateOne);
-router.delete('/users/:id/subscriptions/:subscriptionid', items.subscriptionsDeleteOne);
+router.get('/users/:userid/subscriptions', items.subscriptionsList);    //tested
+router.post('/users/:userid/subscriptions', items.subscriptionsCreate);
+router.get('/users/:userid/subscriptions/:subscriptionid', items.subscriptionsReadOne);     //tested
+router.put('/users/:userid/subscriptions/:subscriptionid', items.subscriptionsUpdateOne);
+router.delete('/users/:userid/subscriptions/:subscriptionid', items.subscriptionsDeleteOne);
 
 module.exports = router;
