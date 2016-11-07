@@ -57,7 +57,7 @@ module.exports.renderSeries = function(req, res) {
 
 module.exports.renderCollection = function(req, res) {
     // get a user's collection from the application database
-    var user = req.params.id;
+    var user = req.params.userid;
 
     var requestOptions = {
         url: baseURL + '/api/users/' + user,

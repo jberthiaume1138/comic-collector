@@ -18,21 +18,13 @@ var sendJSONResponse = function(res, status, content) {
 module.exports.usersList = function(req, res) {
     // gets a list of all the registered users
 
-    // user.find(function(err, users) {
-    //     if (err) {
-    //         res.json({err: "ERROR"});
-    //         return;
-    //     }
-    //     res.json(users);
-    // });
-
-    // re-write using promises...exec() returns promise
     user.find().exec()
         .then(function(users) {
             sendJSONResponse(res, 200, users);
         })
         .catch(function(err) {
             console.log(err);
+            sendJSONResponse(res, 404, {message: 'ERROR! Cannot find any users. '});
         });
 };
 
@@ -40,30 +32,30 @@ module.exports.usersCreate = function(req, res) {
     // create a new user
 
     var dataToSave = {
-                        username: "homer",
-                        password: "donuts",
-                        firstname: "Homer",
-                        lastname: "Simpson",
+                        username: "negan",
+                        password: "lucille",
+                        firstname: "Negan",
+                        lastname: "ScaryGuy",
                         subscriptions: [
-            {
-                seriesid: 20617,
-                title: 'Old Man Logan',
-                startyear: 2016,
-                inprogress: true
-            },
-            {
-                seriesid: 19711,
-                title: "Han Solo",
-                startyear : 2016,
-                inprogress: false
-            },
-            {
-                seriesid: 20476,
-                title: "Invincible Iron Man",
-                startyear : 2015,
-                inprogress: true
-            }
-        ]
+                            {
+                                seriesid: 20617,
+                                title: 'Old Man Logan',
+                                startyear: 2016,
+                                inprogress: true
+                            },
+                            {
+                                seriesid: 19711,
+                                title: "Han Solo",
+                                startyear : 2016,
+                                inprogress: false
+                            },
+                            {
+                                seriesid: 20476,
+                                title: "Invincible Iron Man",
+                                startyear : 2015,
+                                inprogress: true
+                            }
+                        ]
                     };
 
     user.create(dataToSave)
@@ -77,15 +69,6 @@ module.exports.usersCreate = function(req, res) {
 
 module.exports.usersReadOne = function(req, res) {
     // gets a complete user object
-
-    // if(req.params.id) {
-    //     user.findById({_id: req.params.id}, function(err, item) {
-    //         res.json(item);
-    //     });
-    // } else {
-    //     sendJSONResponse(res, 400, {'message': 'No ID provided in request'});
-    // }
-
     if(req.params.userid) {
         user.findById(req.params.userid).exec()
             .then(function(users) {
@@ -105,7 +88,7 @@ module.exports.usersUpdateOne = function(req, res) {
     // update a user
     var userID = req.params.userid;
     var updateData = {
-                        password: "beer",
+                        password: "porkchops",
                     };
 
     user.findOneAndUpdate({_id: userID}, updateData)
@@ -123,60 +106,60 @@ module.exports.usersDeleteOne = function(req, res) {
 
     user.findOneAndRemove({_id: userID})
         .then(function(data) {
-            sendJSONResponse(res, 200, {'message':'Removed' + userID});
+            sendJSONResponse(res, 200, {'message':'Removed ' + userID});
         })
         .catch(function(err) {
             console.log(err);
         });
 };
 
-// ---------
+// -------------------------
 
 module.exports.subscriptionsList = function(req, res) {
     // list all of a users subscriptions
-    var promise = new Promise(function(resolve, reject) {
-        if(req.params) {
-            user.findById(req.params.userid, function(err, data) {
-                if(!err) {
-                    resolve(data);
-                } else {
-                    reject(err);
-                }
-            }).select('subscriptions');
-        } else {
-            sendJSONResponse(res, 400, {'message': 'No ID provided in request'});
-        }
-    });
-
-    promise.then(function(result) {
-        sendJSONResponse(res, 200, result.subscriptions);
-    }, function(err) {
-        console.log('Failed!', err);
-    });
-
-    // this works
-    // user
-    //     .findById(req.params.id)
-    //     .select('subscriptions')
-    //     .exec(function(err, data) {
-    //         sendJSONResponse(res, 200, data.subscriptions);
-    //     });
+    if(req.params.userid) {
+        user.findById(req.params.userid)
+            .select('subscriptions')
+            .exec()
+            .then(function(subs) {
+                sendJSONResponse(res, 200, subs)
+            })
+            .catch(function(err) {
+                console.log(err);
+                sendJSONResponse(res, 400, {'ERROR!': 'User ID not found'});
+            });
+    }
+    else {
+        sendJSONResponse(res, 400, {'ERROR!': 'No ID provided'});
+    }
 };
 
 module.exports.subscriptionsCreate = function(req, res) {
     // create a new subscription for a user
-    sendJSONResponse(res, 201, {"status": "ADDED"});
-    //
-    // if(req.params.id) {}
-    //     var promise = new Promise(function(resolve, reject) {
-    //         user.findById(req.params.id, function(err, data) {
-    //             subscription.save
-    //         });
-    //     });
-    // }
-    // else {
-    //     sendJSONResponse(res, 400, {'message': 'No ID provided in request'});
-    // }
+
+    var newSub = {
+                    seriesid: 123456,
+                    title: 'The Walking Dead'
+                }
+
+    user.findById(req.params.userid)
+        .then(function(thisUser) {
+            thisUser.subscriptions.push(newSub);
+            return thisUser;
+        })
+        .then(function(thisUser) {
+            thisUser.save(function(err, newUser) {
+                if(err) {
+                    console.log(err);
+                }
+                else {
+                    sendJSONResponse(res, 201, newUser);
+                }
+            });
+        })
+        .catch(function(err) {
+            console.log(err);
+        });
 };
 
 module.exports.subscriptionsReadOne = function(req, res) {
