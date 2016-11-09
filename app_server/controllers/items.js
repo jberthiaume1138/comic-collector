@@ -57,23 +57,31 @@ module.exports.renderSeries = function(req, res) {
 
 module.exports.renderCollection = function(req, res) {
     // get a user's collection from the application database
+
     var user = req.params.userid;
 
-    var requestOptions = {
-        url: baseURL + '/api/users/' + user,
-        method: 'GET',
-        json: {}
-    };
+    if(!user) {
+        console.log('User not logged in');
+        res.render('unauthorized');
+    }
+    else {
+        var requestOptions = {
+            url: baseURL + '/api/users/' + user,
+            method: 'GET',
+            json: {}
+        };
 
-    request(requestOptions, function(err, response, body) {
-        if(err) {
-            console.log(err);
-        }
-        else if(response.statusCode === 200) {
-            res.render('collection', body);
-        }
-        else {
-            console.log(response.statusCode);
-        }
-    });
+
+        request(requestOptions, function(err, response, body) {
+            if(err) {
+                console.log(err);
+            }
+            else if(response.statusCode === 200) {
+                res.render('collection', body);
+            }
+            else {
+                console.log(response.statusCode);
+            }
+        });
+    }
 };

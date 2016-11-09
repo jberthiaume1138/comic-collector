@@ -15,7 +15,7 @@ router.put('/users/:userid', items.usersUpdateOne);     //x
 router.delete('/users/:userid', items.usersDeleteOne);  //x
 
 router.get('/users/:userid/subscriptions', items.subscriptionsList);    //x //tested
-router.post('/users/:userid/subscriptions', items.subscriptionsCreate);
+router.post('/users/:userid/subscriptions', items.subscriptionsCreate); //x
 router.get('/users/:userid/subscriptions/:subscriptionid', items.subscriptionsReadOne);     //tested
 router.put('/users/:userid/subscriptions/:subscriptionid', items.subscriptionsUpdateOne);
 router.delete('/users/:userid/subscriptions/:subscriptionid', items.subscriptionsDeleteOne);

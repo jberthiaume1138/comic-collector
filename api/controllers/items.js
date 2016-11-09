@@ -163,34 +163,50 @@ module.exports.subscriptionsCreate = function(req, res) {
 
 module.exports.subscriptionsReadOne = function(req, res) {
     // read a single subscription from a user
-
-    // if(req.params.id && req.params.subscriptionid) {
-    //     var promise = new Promise(function(resolve, reject) {
-    //         user.findById(req.params.id, function(err, data) {
-    //             if(!err) {
-    //                 resolve(data.seriesid(req.params.subscriptionid));
-    //             } else {
-    //                 reject(err);
-    //             }
-    //         }).select('subscriptions');
-    //     });
-    //
-    //     promise.then(function(result) {
-    //         sendJSONResponse(res, 200, result.subscriptions);
-    //     }, function(err) {
-    //         console.log('Failed!', err);
-    //     });
-    // }
-    // else {
-    //     sendJSONResponse(res, 400, {'message': 'No ID provided in request'});
-    // }
-
-
+    if(req.params.userid) {
+        user.findById(req.params.userid).exec()
+            .then(function(users) {
+                sendJSONResponse(res, 200, users);
+            })
+            .catch(function(err) {
+                console.log(err);
+                sendJSONResponse(res, 400, {'ERROR!': 'User ID not found'});
+            });
+    }
+    else {
+        sendJSONResponse(res, 400, {'ERROR!': 'No ID provided'});
+    }
 };
 
 module.exports.subscriptionsUpdateOne = function(req, res) {
     // update a single subscription
-    sendJSONResponse(res, 200, {"status": "UPDATED"});
+
+    var newSub = {
+                    seriesid: 123456,
+                    title: 'The Walking Dead'
+                }
+
+    user.findById(req.params.userid)
+        .then(function(thisUser) {
+            thisUser.subscriptions.push(newSub);
+            return thisUser;
+        })
+        .then(function(thisUser) {
+
+        })
+        .then(function(thisUser) {
+            thisUser.save(function(err, newUser) {
+                if(err) {
+                    return(err);
+                }
+                else {
+                    sendJSONResponse(res, 201, newUser);
+                }
+            });
+        })
+        .catch(function(err) {
+            console.log(err);
+        });
 };
 
 module.exports.subscriptionsDeleteOne = function(req, res) {
