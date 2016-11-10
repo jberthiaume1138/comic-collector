@@ -18,7 +18,7 @@ console.log(process.env.NODE_ENV);
 
 var dbURI = 'mongodb://localhost/comic-collector';
 if(process.env.NODE_ENV === 'production') {
-    dbURI = 'mongodb://heroku_8k30n99h:d646ehdetp8gn6egficncpdulm@ds149567.mlab.com:49567/heroku_8k30n99h';
+    dbURI = process.env.MONGOLAB_URI;
 }
 mongoose.connect(dbURI);
 
