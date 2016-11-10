@@ -1,26 +1,29 @@
 {
-    "_id":"580eeb996b3612c3eba80cda",
+    "_id": "58202f0bf4f19536a02e98a5",
     "username": "homer",
-    "password": "donuts",
+    "password": "porkchops",
     "firstname": "Homer",
     "lastname": "Simpson",
     "subscriptions": [
         {
             "seriesid": 20617,
             "title": "Old Man Logan",
-            "startdate" : 2016,
+            "startyear": 2016,
+            "_id": "58202f0bf4f19536a02e98a8",
             "inprogress": true
         },
         {
             "seriesid": 19711,
             "title": "Han Solo",
-            "startdate" : 2016,
+            "startyear": 2016,
+            "_id": "58202f0bf4f19536a02e98a7",
             "inprogress": false
         },
         {
             "seriesid": 20476,
             "title": "Invincible Iron Man",
-            "startdate" : 2015,
+            "startyear": 2015,
+            "_id": "58202f0bf4f19536a02e98a6",
             "inprogress": true
         }
     ]

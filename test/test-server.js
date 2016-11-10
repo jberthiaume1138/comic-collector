@@ -1,6 +1,8 @@
 var chai = require('chai');
 var chaiHttp = require('chai-http');
 
+var user = require('../api/db/models/user')
+
 var server = require('../server.js');
 
 global.environment = 'test';
@@ -11,6 +13,7 @@ var app = server.app;
 chai.use(chaiHttp);
 
 var existingData = require('./data/homer.json');
+var seed = require('../api/db/seed.js');
 
 describe('Comic Collector', function() {
 
@@ -58,6 +61,18 @@ describe('Comic Collector', function() {
     });
 
     describe('API', function() {
+        before(function(done) {
+            seed.run(function() {
+                done();
+            });
+        });
+
+        after(function(done) {
+            user.remove(function() {
+                done();
+            });
+        });
+
         // it('should display the series page on get', function(done) {
         //     this.timeout(4000);
         //     chai.request(app)
@@ -87,7 +102,7 @@ describe('Comic Collector', function() {
                     res.body[0]._id.should.be.a('string');
                     res.body[0].should.have.property('username');
                     res.body[0].username.should.be.a('string');
-                    res.body[0].username.should.equal('homer');
+                    res.body[0].username.should.equal(existingData.username);
                     res.body[0].should.have.property('firstname');
                     res.body[0].firstname.should.be.a('string');
                     res.body[0].firstname.should.equal('Homer');
