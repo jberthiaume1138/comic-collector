@@ -1,5 +1,4 @@
 var mongoose = require('mongoose');
-var dbURI = 'mongodb://localhost/comic-collector';
 
 // SIGINT emulation for Windows
 var readLine = require ('readline');
@@ -13,10 +12,14 @@ if (process.platorm === 'win32') {
     });
 }
 
-// add logic to handle production DB
-//
-
 mongoose.Promise = global.Promise;
+
+console.log(process.env.NODE_ENV);
+
+var dbURI = 'mongodb://localhost/comic-collector';
+if(process.env.NODE_ENV === 'production') {
+    dbURI = 'mongodb://heroku_8k30n99h:d646ehdetp8gn6egficncpdulm@ds149567.mlab.com:49567/heroku_8k30n99h';
+}
 mongoose.connect(dbURI);
 
 // CONNECTION EVENTS

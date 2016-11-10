@@ -122,7 +122,7 @@ module.exports.subscriptionsList = function(req, res) {
             .select('subscriptions')
             .exec()
             .then(function(subs) {
-                sendJSONResponse(res, 200, subs)
+                sendJSONResponse(res, 200, subs.subscriptions);
             })
             .catch(function(err) {
                 console.log(err);
