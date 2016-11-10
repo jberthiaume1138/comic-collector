@@ -3,10 +3,9 @@ var chaiHttp = require('chai-http');
 
 var user = require('../api/db/models/user')
 
-var server = require('../server.js');
+global.DATABASE_URL = 'mongodb://localhost/comic-collector-test';
 
-// global.environment = 'test';
-// console.log(process.env.NODE_ENV);
+var server = require('../server.js');
 
 var should = chai.should();
 var app = server.app;
