@@ -1,0 +1,8 @@
+{
+    "test": {
+        "uri": "mongodb://localhost/comic-collector-test"
+    },
+    "development": {
+        "uri": "mongodb://localhost/comic-collector"
+    }
+}

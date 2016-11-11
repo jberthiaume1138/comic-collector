@@ -3,8 +3,7 @@ var chaiHttp = require('chai-http');
 
 var user = require('../api/db/models/user')
 
-global.DATABASE_URL = 'mongodb://localhost/comic-collector-test';
-
+global.environment = 'test';
 var server = require('../server.js');
 
 var should = chai.should();
@@ -62,7 +61,7 @@ describe('Comic Collector', function() {
 
     describe('API', function() {
         before(function(done) {
-            seed.run(function() {
+            seed.loadTestData(function() {
                 done();
             });
         });

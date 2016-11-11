@@ -17,12 +17,20 @@ mongoose.Promise = global.Promise;
 // console.log(process.env.NODE_ENV);
 
 // var dbURI = 'mongodb://localhost/comic-collector';
-var config = require('./config.js');
-var dbURI = config.DATABASE_URL;
+var environment = require('../../environment.js');
+console.log(environment);
 
-if(process.env.NODE_ENV === 'production') {
+var config = require('./config.json');
+
+// var dbURI = config.DATABASE_URL;
+var dbURI = config[environment].uri;
+console.log(dbURI);
+
+if(process.env.NODE_ENV) {
     dbURI = process.env.MONGOLAB_URI;
 }
+
+
 mongoose.connect(dbURI);
 
 // CONNECTION EVENTS
