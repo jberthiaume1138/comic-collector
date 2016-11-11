@@ -17,14 +17,16 @@ mongoose.Promise = global.Promise;
 var environment = require('../../environment.js');
 var config = require('./config.json');
 
-var dbURI;
-if(process.env.NODE_ENV === 'production') {
-    dbURI = process.env.MONGOLAB_URI;
-}
+// var dbURI;
+// if(process.env.NODE_ENV === 'production') {
+//     dbURI = process.env.MONGOLAB_URI;
+// }
 // else {
 //     dbURI = config[environment].uri;
 //     console.log(dbURI);
 // }
+
+var dbURI = process.env.MONGOLAB_URI;
 
 
 mongoose.connect(dbURI);
