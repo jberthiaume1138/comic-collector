@@ -17,16 +17,16 @@ mongoose.Promise = global.Promise;
 var environment = require('../../environment.js');
 var config = require('./config.json');
 
-// var dbURI;
-// if(process.env.NODE_ENV === 'production') {
-//     dbURI = process.env.MONGOLAB_URI;
-// }
-// else {
-//     dbURI = config[environment].uri;
-//     console.log(dbURI);
-// }
+var dbURI;
+if(process.env.NODE_ENV === 'production') {
+    dbURI = process.env.MONGODB_URI;
+}
+else {
+    dbURI = config[environment].uri;
+    console.log(dbURI);
+}
 
-var dbURI = 'mongodb://heroku_8k30n99h:d646ehdetp8gn6egficncpdulm@ds149567.mlab.com:49567/heroku_8k30n99h';
+// var dbURI = 'mongodb://heroku_8k30n99h:d646ehdetp8gn6egficncpdulm@ds149567.mlab.com:49567/heroku_8k30n99h';
 
 
 mongoose.connect(dbURI);
