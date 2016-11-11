@@ -26,9 +26,6 @@ else {
     console.log(dbURI);
 }
 
-// var dbURI = 'mongodb://heroku_8k30n99h:d646ehdetp8gn6egficncpdulm@ds149567.mlab.com:49567/heroku_8k30n99h';
-
-
 mongoose.connect(dbURI);
 
 // CONNECTION EVENTS
