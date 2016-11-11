@@ -14,13 +14,8 @@ if (process.platorm === 'win32') {
 
 mongoose.Promise = global.Promise;
 
-// console.log(process.env.NODE_ENV);
-
-// var dbURI = 'mongodb://localhost/comic-collector';
 var environment = require('../../environment.js');
 var config = require('./config.json');
-
-// var dbURI = config.DATABASE_URL;
 
 var dbURI;
 if(process.env.NODE_ENV === 'production') {
