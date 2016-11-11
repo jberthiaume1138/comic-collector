@@ -18,16 +18,17 @@ mongoose.Promise = global.Promise;
 
 // var dbURI = 'mongodb://localhost/comic-collector';
 var environment = require('../../environment.js');
-console.log(environment);
-
 var config = require('./config.json');
 
 // var dbURI = config.DATABASE_URL;
-var dbURI = config[environment].uri;
-console.log(dbURI);
 
-if(process.env.NODE_ENV) {
+var dbURI;
+if(process.env.NODE_ENV === 'production') {
     dbURI = process.env.MONGOLAB_URI;
+}
+else {
+    dbURI = config[environment].uri;
+    console.log(dbURI);
 }
 
 
