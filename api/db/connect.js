@@ -21,10 +21,10 @@ var dbURI;
 if(process.env.NODE_ENV === 'production') {
     dbURI = process.env.MONGOLAB_URI;
 }
-else {
-    dbURI = config[environment].uri;
-    console.log(dbURI);
-}
+// else {
+//     dbURI = config[environment].uri;
+//     console.log(dbURI);
+// }
 
 
 mongoose.connect(dbURI);
