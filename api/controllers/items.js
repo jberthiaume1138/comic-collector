@@ -11,8 +11,8 @@ var ts = new Date().getTime();
 var hash = crypto.MD5(ts + priv + pub).toString();
 
 var sendJSONResponse = function(res, status, content) {
-    res.status(status).json(content);
-    // res.send(content);
+    res.status(status);
+    res.send(content);
 };
 
 module.exports.usersList = function(req, res) {
@@ -67,13 +67,17 @@ module.exports.usersReadOne = function(req, res) {
 module.exports.usersUpdateOne = function(req, res) {
     // update a user
     var userID = req.params.userid;
-    var updateData = {
-                        password: "porkchops",
-                    };
 
-    user.findOneAndUpdate({_id: userID}, updateData)
+    var dataToUpdate = {
+                            username: req.body.username,
+                            password: req.body.password,
+                            firstname: req.body.firstname,
+                            lastname: req.body.lastname
+    };
+
+    user.findOneAndUpdate({_id: userID}, dataToUpdate)
         .then(function(data) {
-            sendJSONResponse(res, 200, {message: 'UPDATED'});
+            sendJSONResponse(res, 200, {'UPDATED': data});
         })
         .catch(function(err) {
             console.log(err);

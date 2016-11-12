@@ -212,7 +212,7 @@ describe('Comic Collector', function() {
             chai.request(app)
                 .post('/api/users')
                 .send(moe)
-                .end(function(error, res) {
+                .end(function(err, res) {
                     res.should.have.status(201);
                     res.should.be.json;
                     res.body.should.be.an('object');
@@ -290,14 +290,22 @@ describe('Comic Collector', function() {
                 });
         });
 
-        // it('should update a single user on PUT', function(done) {
-        //     chai.request(app)
-        //         .put('/api/users/' + ExistingUserID)
-        //         .send(testUpdateData)
-        //         .end(function(err, res) {
-        //             done();
-        //         });
-        // });
+        it('should update a single user on PUT', function(done) {
+            chai.request(app)
+                .put('/api/users/' + '58202f0bf4f19536a02e98a5')    //using Homer
+                .send({
+                        password: "porkchops"
+                    })
+                .end(function(err, res) {
+                    res.should.have.status(200);
+                    res.should.be.json;
+                    res.should.be.an('object');
+                    res.body.should.have.property('UPDATED');
+                    res.body.UPDATED.should.have.property('password');
+                    res.body.UPDATED.password.should.equal('porkchops');
+                    done();
+                });
+        });
 
         // it('should remove a single user on DELETE', function(done) {
         //     chai.reques(app)
