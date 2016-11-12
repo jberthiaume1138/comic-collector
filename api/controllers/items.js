@@ -11,8 +11,8 @@ var ts = new Date().getTime();
 var hash = crypto.MD5(ts + priv + pub).toString();
 
 var sendJSONResponse = function(res, status, content) {
-    res.status(status);
-    res.send(content);
+    res.status(status).json(content);
+    // res.send(content);
 };
 
 module.exports.usersList = function(req, res) {
@@ -32,35 +32,15 @@ module.exports.usersCreate = function(req, res) {
     // create a new user
 
     var dataToSave = {
-                        username: "negan",
-                        password: "lucille",
-                        firstname: "Negan",
-                        lastname: "ScaryGuy",
-                        subscriptions: [
-                            {
-                                seriesid: 20617,
-                                title: 'Old Man Logan',
-                                startyear: 2016,
-                                inprogress: true
-                            },
-                            {
-                                seriesid: 19711,
-                                title: "Han Solo",
-                                startyear : 2016,
-                                inprogress: false
-                            },
-                            {
-                                seriesid: 20476,
-                                title: "Invincible Iron Man",
-                                startyear : 2015,
-                                inprogress: true
-                            }
-                        ]
-                    };
+        username: req.body.username,
+        password: req.body.password,
+        firstname: req.body.firstname,
+        lastname: req.body.lastname
+    };
 
     user.create(dataToSave)
         .then(function(data) {
-            sendJSONResponse(res, 201, data);
+            sendJSONResponse(res, 201, {'ADDED': data});
         })
         .catch(function(err) {
             console.log(err);

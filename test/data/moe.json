@@ -1,0 +1,26 @@
+{
+    "username": "moeduff",
+    "password": "midge",
+    "firstname": "Moe",
+    "lastname": "Szyslak",
+    "subscriptions": [
+        {
+            "seriesid": 20465,
+            "title": "Guardians of the Galaxy",
+            "startyear": 2015,
+            "inprogress": true
+        },
+        {
+            "seriesid": 17285,
+            "title": "Amazing Spider-Man",
+            "startyear": 2014,
+            "inprogress": true
+        },
+        {
+            "seriesid": 22547,
+            "title": "Avengers",
+            "startyear": 2016,
+            "inprogress": true
+        }
+    ]
+}

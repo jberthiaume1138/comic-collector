@@ -12,6 +12,7 @@ var app = server.app;
 chai.use(chaiHttp);
 
 var seed = require('../api/db/seed.js');
+var moe = require('./data/moe.json');
 
 describe('Comic Collector', function() {
 
@@ -207,18 +208,26 @@ describe('Comic Collector', function() {
                 });
         });
 
-        // it('should add a new user on POST', function(done) {
-        //     chai.request(app)
-        //         .get('/api/users')       // verify dummy user data parameter
-        //         .send({'username':'frink', 'firstname':'Professor'})
-        //         .end(function(error, res) {
-        //             res.should.have.status(201);
-        //             res.should.be.json;
-        //             res.body.should.have.property('username');
-        //             res.body.username.should.equal('frink');
-        //             done();
-        //         });
-        // });
+        it('should add a new user on POST', function(done) {
+            chai.request(app)
+                .post('/api/users')
+                .send(moe)
+                .end(function(error, res) {
+                    res.should.have.status(201);
+                    res.should.be.json;
+                    res.body.should.be.an('object');
+                    res.body.should.have.property('ADDED');
+                    res.body.ADDED.should.have.property('username');
+                    res.body.ADDED.username.should.equal('moeduff');
+                    res.body.ADDED.should.have.property('password');
+                    res.body.ADDED.password.should.equal('midge');
+                    res.body.ADDED.should.have.property('firstname');
+                    res.body.ADDED.firstname.should.equal('Moe');
+                    res.body.ADDED.should.have.property('lastname');
+                    res.body.ADDED.lastname.should.equal('Szyslak');
+                    done();
+                });
+        });
 
         it('should display a single user on GET', function(done) {
             chai.request(app)

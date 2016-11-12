@@ -1,0 +1,26 @@
+{
+    "username": "smithers",
+    "password": "iloveburns",
+    "firstname": "Waylon",
+    "lastname": "Smithers",
+    "subscriptions": [
+        {
+            "seriesid": 20780,
+            "title": "Daredevil",
+            "startyear": 2015,
+            "inprogress": true
+        },
+        {
+            "seriesid": 20460,
+            "title": "Extraordinary X-Men",
+            "startyear": 2015,
+            "inprogress": true
+        },
+        {
+            "seriesid": 18700,
+            "title": "Fantastic Four",
+            "startyear": 2015,
+            "inprogress": true
+        }
+    ]
+}
