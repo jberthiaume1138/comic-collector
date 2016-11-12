@@ -15,14 +15,14 @@
         {
             "seriesid": 20613,
             "title": "Deadpool",
-            "startdate": 2015,
+            "startyear": 2015,
             "_id": "58202f0bf4f19536a02e98a3",
             "inprogress": true
         },
         {
             "seriesid": 20457,
             "title": "Doctor Strange",
-            "startdate": 2015,
+            "startyear": 2015,
             "_id": "58202f0bf4f19536a02e98a4",
             "inprogress": true
         }
