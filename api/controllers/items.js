@@ -68,14 +68,14 @@ module.exports.usersUpdateOne = function(req, res) {
     // update a user
     var userID = req.params.userid;
 
-    var dataToUpdate = {
-                            username: req.body.username,
-                            password: req.body.password,
-                            firstname: req.body.firstname,
-                            lastname: req.body.lastname
-    };
+    var set = {};
+    for (var field in req.body) {
+        set[field] = req.body[field];
+    }
 
-    user.findOneAndUpdate({_id: userID}, dataToUpdate)
+    var options = {new: true};
+
+    user.findByIdAndUpdate(userID, {$set: set}, options)
         .then(function(data) {
             sendJSONResponse(res, 200, {'UPDATED': data});
         })
@@ -97,7 +97,7 @@ module.exports.usersDeleteOne = function(req, res) {
         });
 };
 
-// -------------------------
+// --------------------------------------------------------------------------------
 
 module.exports.subscriptionsList = function(req, res) {
     // list all of a users subscriptions
