@@ -330,7 +330,7 @@ describe('Comic Collector', function() {
 
         // sub document testing - subscriptions -------------------------------------------------
 
-        it('should list all of a users subscriptions on GET', function(done) {
+        it('should list all of a user\'s subscriptions on GET', function(done) {
             chai.request(app)
                 .get('/api/users/' + '58202f0bf4f19536a02e98a5' + '/subscriptions')
                 .end(function(err, res) {
@@ -380,26 +380,31 @@ describe('Comic Collector', function() {
                 });
         });
 
-        // it('should add a new item to the user subscriptions on POST', function(done) {
-        //     chai.request(app)
-        //         .post('/api/subscriptions/homer')      // insert parameters...
-        //         .end(function(error, res) {
-        //             res.should.have.status(200);
-        //             res.should.be.json;
-        //             done();
-        //         });
-        // });
-        //
+        it('should add a new item to the user\'s subscriptions on POST', function(done) {
+            chai.request(app)
+                .post('/api/users/' + '58202f0bf4f19536a02e98a5' + '/subscriptions')
+                .send({ "seriesid": 20912,
+                        "title": "Black Panther",
+                        "startyear": 2016,
+                        "inprogress": true})
+                .end(function(error, res) {
+                    res.should.have.status(201);
+                    res.should.be.json;
+                    done();
+                });
+        });
+
         // it('should edit an item in the user subscriptions on PUT', function(done) {
         //     chai.request(app)
-        //         .put('/api/subscriptions/homer')      // insert parameters...
+        //         .put('/api/subscriptions/homer')
+        //         .send({})
         //         .end(function(error, res) {
         //             res.should.have.status(200);
         //             res.should.be.json;
         //             done();
         //         });
         // });
-        //
+
         // it('should delete an item from the subscriptions on DELETE', function(done) {
         //     chai.request(app)
         //         .delete('/api/subscriptions/homer')      // insert parameters...

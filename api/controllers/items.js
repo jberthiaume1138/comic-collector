@@ -118,10 +118,13 @@ module.exports.subscriptionsList = function(req, res) {
 
 module.exports.subscriptionsCreate = function(req, res) {
     // create a new subscription for a user
-    var newSub = {
-                    seriesid: 123456,
-                    title: 'The Walking Dead'
-                }
+
+    var newSub = {};
+    for (var field in req.body) {
+        newSub[field] = req.body[field];
+    }
+
+    // as response, send the entire user or just the updated sub-document?
 
     user.findById(req.params.userid)
         .then(function(thisUser) {
