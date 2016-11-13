@@ -31,14 +31,12 @@ module.exports.usersList = function(req, res) {
 module.exports.usersCreate = function(req, res) {
     // create a new user
 
-    var dataToSave = {
-        username: req.body.username,
-        password: req.body.password,
-        firstname: req.body.firstname,
-        lastname: req.body.lastname
-    };
+    var dataToAdd = {};
+    for (var field in req.body) {
+        dataToAdd[field] = req.body[field];
+    }
 
-    user.create(dataToSave)
+    user.create(dataToAdd)
         .then(function(data) {
             sendJSONResponse(res, 201, {'ADDED': data});
         })
