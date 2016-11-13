@@ -88,9 +88,9 @@ module.exports.usersDeleteOne = function(req, res) {
     // delete a user
     var userID = req.params.userid;
 
-    user.findOneAndRemove({_id: userID})
+    user.findByIdAndRemove(userID)
         .then(function(data) {
-            sendJSONResponse(res, 200, {'message':'Removed ' + userID});
+            sendJSONResponse(res, 200, {'REMOVED': data});
         })
         .catch(function(err) {
             console.log(err);

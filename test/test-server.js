@@ -307,13 +307,26 @@ describe('Comic Collector', function() {
                 });
         });
 
-        // it('should remove a single user on DELETE', function(done) {
-        //     chai.reques(app)
-        //         .delete('/api/users/' + existingData._id)
-        //         .end(function(err, res) {
-        //             done();
-        //         });
-        // });
+        it('should remove a single user on DELETE', function(done) {
+            chai.request(app)
+                .delete('/api/users/' + '5818325d2358e1cdacf66362')        // monty's ID
+                .end(function(err, res) {
+                    res.should.have.status(200);
+                    res.should.be.json;
+                    res.body.should.be.an('object');
+                    res.body.should.have.property('REMOVED');
+                    res.body.REMOVED.should.be.an('object');
+                    res.body.REMOVED.should.have.property('username');
+                    res.body.REMOVED.username.should.equal('monty');
+                    res.body.REMOVED.should.have.property('password');
+                    res.body.REMOVED.password.should.equal('nuclear');
+                    res.body.REMOVED.should.have.property('firstname');
+                    res.body.REMOVED.firstname.should.equal('Montgomery');
+                    res.body.REMOVED.should.have.property('lastname');
+                    res.body.REMOVED.lastname.should.equal('Burns');
+                    done();
+                });
+        });
 
         // sub document testing - subscriptions -------------------------------------------------
 
