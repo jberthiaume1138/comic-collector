@@ -1,7 +1,8 @@
 var crypto = require('crypto-js');
 var unirest = require('unirest');
+var request = require('request');
+
 var user = require('../db/models/user')
-// var subscription = require('../db/models/subscription');
 
 var pub = process.env.pub;
 var priv = process.env.priv;
@@ -17,7 +18,6 @@ var sendJSONResponse = function(res, status, content) {
 
 module.exports.usersList = function(req, res) {
     // gets a list of all the registered users
-
     user.find().exec()
         .then(function(users) {
             sendJSONResponse(res, 200, users);
@@ -30,7 +30,6 @@ module.exports.usersList = function(req, res) {
 
 module.exports.usersCreate = function(req, res) {
     // create a new user
-
     var dataToAdd = {};
     for (var field in req.body) {
         dataToAdd[field] = req.body[field];
@@ -95,8 +94,6 @@ module.exports.usersDeleteOne = function(req, res) {
         });
 };
 
-// --------------------------------------------------------------------------------
-
 module.exports.subscriptionsList = function(req, res) {
     // list all of a users subscriptions
     if(req.params.userid) {
@@ -126,7 +123,7 @@ module.exports.subscriptionsCreate = function(req, res) {
 
     // as response, send the entire user or
         // or just the updated sub-document array
-        // or the new data object?
+        // or the new subscription object?
 
     user.findById(req.params.userid)
         .then(function(thisUser) {
@@ -134,17 +131,18 @@ module.exports.subscriptionsCreate = function(req, res) {
             return thisUser;
         })
         .then(function(thisUser) {
-            thisUser.save(function(err, newUser) {
+            thisUser.save(function(err, updatedUser) {
                 if(err) {
                     return(err);
                 }
                 else {
-                    sendJSONResponse(res, 201, newUser);
+                    sendJSONResponse(res, 201, updatedUser);
                 }
             });
         })
         .catch(function(err) {
             console.log(err);
+            sendJSONResponse(res, 404, {'ERROR adding subscription': err});
         });
 };
 
@@ -167,7 +165,6 @@ module.exports.subscriptionsReadOne = function(req, res) {
 
 module.exports.subscriptionsUpdateOne = function(req, res) {
     // update a single subscription
-
     var userToUpdateId = req.params.userid;
     var subToUpdateId = req.params.subscriptionid;
 
@@ -204,7 +201,7 @@ module.exports.subscriptionsDeleteOne = function(req, res) {
                 if(err) {
                     return err;
                 }
-                sendJSONResponse(res, 200, {'REMOVED': subToRemove});    // or send the whole user?
+                sendJSONResponse(res, 200, {'REMOVED': subToRemove});
             })
         })
         .catch(function(err) {
@@ -213,12 +210,8 @@ module.exports.subscriptionsDeleteOne = function(req, res) {
         });
 };
 
-
-
-
 module.exports.seriesIssues = function(req, res) {
     // gets the complete run of a series from Marvel's API
-
     var url = 'http://gateway.marvel.com:80/v1/public/series/';
     var seriesId = req.params.id;
 
@@ -232,6 +225,25 @@ module.exports.seriesIssues = function(req, res) {
             .end(function(data) {
                 res.json(data.body);
             });
+
+    // var requestOptions = {
+    //     url: baseURL + seriesId + '/comics',
+    //     method: 'GET,'
+    //     json: {}
+    // };
+    //
+    // request(requestOptions, function(err, response, body) {
+    //     if(err) {
+    //         console.log(err);
+    //     }
+    //     else if (response.statusCode === 200) {
+    //             res.json(body);
+    //         }
+    //     }
+    //     else {
+    //         console.log(response.statusCode);
+    //     }
+    // });
 };
 
 module.exports.searchMarvel = function(req, res) {
