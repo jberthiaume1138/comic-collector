@@ -195,7 +195,22 @@ module.exports.subscriptionsUpdateOne = function(req, res) {
 
 module.exports.subscriptionsDeleteOne = function(req, res) {
     // delete a single subscription
-    sendJSONResponse(res, 204, {"status": "REMOVED"});
+    user.findById(req.params.userid).exec()
+        .then(function(thisUser) {
+            var subToRemove = thisUser.subscriptions.id(req.params.subscriptionid);
+            subToRemove.remove();
+
+            thisUser.save(function(err, updatedUser) {
+                if(err) {
+                    return err;
+                }
+                sendJSONResponse(res, 200, {'REMOVED': subToRemove});    // or send the whole user?
+            })
+        })
+        .catch(function(err) {
+            console.log(err);
+            sendJSONResponse(res, 404, {"ERROR removing!": err});
+        });
 };
 
 

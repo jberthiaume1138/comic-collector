@@ -390,6 +390,7 @@ describe('Comic Collector', function() {
                 .end(function(error, res) {
                     res.should.have.status(201);
                     res.should.be.json;
+                    // add more tests later
                     done();
                 });
         });
@@ -416,14 +417,18 @@ describe('Comic Collector', function() {
                 });
         });
 
-        // it('should delete an item from the subscriptions on DELETE', function(done) {
-        //     chai.request(app)
-        //         .delete('/api/users/' + '58202f0bf4f19536a02e98a5' + '/subscriptions/' + '58202f0bf4f19536a02e98a6')
-        //         .end(function(error, res) {
-        //             res.should.have.status(200);
-        //             res.should.be.json;
-        //             done();
-        //         });
-        // });
+        it('should delete an item from the subscriptions on DELETE', function(done) {
+            chai.request(app)
+                .delete('/api/users/' + '58202f0bf4f19536a02e98a5' + '/subscriptions/' + '58202f0bf4f19536a02e98a6')
+                .end(function(error, res) {
+                    res.should.have.status(200);
+                    res.should.be.json;
+                    res.body.should.have.property('REMOVED');
+                    res.body.REMOVED.should.be.an('object');
+                    res.body.REMOVED.should.have.property('inprogress');
+                    // add more later
+                    done();
+                });
+        });
     });
 });
