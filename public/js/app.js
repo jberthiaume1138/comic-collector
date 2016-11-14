@@ -84,9 +84,9 @@ ComicCollector.prototype.subscribe = function(seriesid, title) {
 			console.log(err);
 		})
 		.done(function(data) {
-            // do something on completion
-            // go to collection page
+            // on success, go to collection page
             console.log(data);
+            window.location.href = '/collection/' + userid;
         });
 
 

@@ -7,8 +7,8 @@ router.get('/', function(req, res) {
     res.render('home');
 });
 
-router.get('/collection', items.renderCollection);
-router.get('/collection/:userid', items.renderCollection);
+router.get('/subscriptions', items.renderSubscriptions);
+router.get('/subscriptions/:userid', items.renderSubscriptions);
 
 router.get('/series/:id', items.renderSeries);
 

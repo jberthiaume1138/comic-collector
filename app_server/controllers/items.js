@@ -55,7 +55,7 @@ module.exports.renderSeries = function(req, res) {
     // res.render('series', logan);
 };
 
-module.exports.renderCollection = function(req, res) {
+module.exports.renderSubscriptions = function(req, res) {
     // get a user's collection from the application database
 
     var user = req.params.userid;
@@ -77,7 +77,7 @@ module.exports.renderCollection = function(req, res) {
                 console.log(err);
             }
             else if(response.statusCode === 200) {
-                res.render('collection', body);
+                res.render('subscriptions', body);
             }
             else {
                 console.log(response.statusCode);
