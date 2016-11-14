@@ -394,20 +394,24 @@ describe('Comic Collector', function() {
                 });
         });
 
-        // it('should edit an item in the user subscriptions on PUT', function(done) {
-        //     chai.request(app)
-        //         .put('/api/subscriptions/homer')
-        //         .send({})
-        //         .end(function(error, res) {
-        //             res.should.have.status(200);
-        //             res.should.be.json;
-        //             done();
-        //         });
-        // });
+        it('should edit an item in the user subscriptions on PUT', function(done) {
+            chai.request(app)
+                .put('/api/users/' + '58202f0bf4f19536a02e98a5' + '/subscriptions/' + '58202f0bf4f19536a02e98a7') //han solo
+                .send({
+                        "inprogress": true,
+                        "startyeard": 1999
+                    })
+                .end(function(error, res) {
+                    res.should.have.status(200);
+                    res.should.be.json;
+                    res.body.should.be.an('object');
+                    done();
+                });
+        });
 
         // it('should delete an item from the subscriptions on DELETE', function(done) {
         //     chai.request(app)
-        //         .delete('/api/subscriptions/homer')      // insert parameters...
+        //         .delete('/api/users/' + '58202f0bf4f19536a02e98a5' + '/subscriptions/' + '58202f0bf4f19536a02e98a6')
         //         .end(function(error, res) {
         //             res.should.have.status(200);
         //             res.should.be.json;

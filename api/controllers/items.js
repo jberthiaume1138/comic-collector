@@ -124,7 +124,9 @@ module.exports.subscriptionsCreate = function(req, res) {
         newSub[field] = req.body[field];
     }
 
-    // as response, send the entire user or just the updated sub-document?
+    // as response, send the entire user or
+        // or just the updated sub-document array
+        // or the new data object?
 
     user.findById(req.params.userid)
         .then(function(thisUser) {
@@ -166,31 +168,28 @@ module.exports.subscriptionsReadOne = function(req, res) {
 module.exports.subscriptionsUpdateOne = function(req, res) {
     // update a single subscription
 
-    var newSub = {
-                    seriesid: 123456,
-                    title: 'The Walking Dead'
-                }
+    var userToUpdateId = req.params.userid;
+    var subToUpdateId = req.params.subscriptionid;
 
-    user.findById(req.params.userid)
+    user.findById(userToUpdateId).exec()
+        // .select('subscriptions')        // do not NEED this, but reduces the amount of data over the wire
         .then(function(thisUser) {
-            thisUser.subscriptions.push(newSub);
-            return thisUser;
-        })
-        .then(function(thisUser) {
+            var thisSub = thisUser.subscriptions.id(subToUpdateId);   // find the subscription - .id() built in method
 
-        })
-        .then(function(thisUser) {
-            thisUser.save(function(err, newUser) {
+            for (var field in req.body) {
+                thisSub[field] = req.body[field];
+            }
+
+            thisUser.save(thisSub, function(err, updatedUser) {
                 if(err) {
-                    return(err);
+                    return err;
                 }
-                else {
-                    sendJSONResponse(res, 201, newUser);
-                }
+                sendJSONResponse(res, 200, {'UPDATED': updatedUser});
             });
         })
         .catch(function(err) {
             console.log(err);
+            sendJSONResponse(res, 404, {"ERROR updating!": err});
         });
 };
 
@@ -201,14 +200,6 @@ module.exports.subscriptionsDeleteOne = function(req, res) {
 
 
 
-
-// module.exports.subscriptions = function(req, res) {
-//     // gets a user's subscriptions
-//     var id = req.params.id;
-//     user.find({_id: id}, function(err, item) {
-//         res.json(item.subscriptions);
-//     });
-// };
 
 module.exports.seriesIssues = function(req, res) {
     // gets the complete run of a series from Marvel's API
