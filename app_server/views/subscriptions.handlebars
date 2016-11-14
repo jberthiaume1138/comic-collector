@@ -5,10 +5,11 @@
             <h2>Your subscriptions:</h2>
         </div>
         <div>
-            <ul>
+            <ul class="subscriptions">
             {{#each subscriptions}}
-                <li>
+                <li id="{{_id}}">
                     <a href="/series/{{seriesid}}">{{title}}</a>
+                    <button class="btnDeleteSub" data-id="{{_id}}">Unsubscribe</button>
                 </li>
             {{/each}}
         </div>

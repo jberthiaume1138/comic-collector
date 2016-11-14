@@ -21,6 +21,9 @@ var ComicCollector = function() {
     self.main.on('click', '.btnSubscribe', function() {
         self.subscribe($(this).data('id'), $(this).data('title'));
     });
+    self.main.on('click', '.btnDeleteSub', function() {
+        self.deleteSubscription($(this).data('id'));
+    });
 };
 
 ComicCollector.prototype.renderData = function(data, template, target) {
@@ -86,16 +89,40 @@ ComicCollector.prototype.subscribe = function(seriesid, title) {
 		.done(function(data) {
             // on success, go to collection page
             console.log(data);
-            window.location.href = '/collection/' + userid;
+            window.location.href = '/subscriptions/' + userid;
         });
+};
 
+ComicCollector.prototype.deleteSubscription = function(series_id) {
+    // method to remove a series sub from the user's subscriptions array
+    // TODO also render a confirmation type warning
 
-    // gets seriesid
-    // queries marvel for details OR is passed in
-    // builds new sub object
-    // calls ComicCollector API with new subscription - POST
+    var self = this;
+    var userid = '5828105cff349d9f38bb946a';
 
+    var url = '/api/users/' + userid + '/subscriptions/' + series_id;
 
+    $.ajax(url, {
+        type: 'DELETE',
+        dataType: 'json',
+    })
+    .done(function(data) {
+        $('#' + series_id).remove();
+    });
+};
+
+ComicCollector.prototype.getSubscriptions = function(userid) {
+    var url = '/api/users/' + userid + '/subscriptions';
+    console.log(url);
+
+    $.getJSON(url)
+        .fail(function(err) {
+            console.log(err);
+        })
+        .done(function(data) {
+            console.log(data);
+            //use the data
+        });
 };
 
 ComicCollector.prototype.updateNeed = function(seriesid) {
