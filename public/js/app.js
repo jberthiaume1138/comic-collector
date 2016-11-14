@@ -1,15 +1,4 @@
 $('document').ready(function() {
-
-
-    //
-    // var context = {name: "Daryl", weapon: "crossbow"};
-    // var compiledTemplate = Handlebars.templates['searchResults'];
-    // var html = compiledTemplate(context);
-    //
-    // $('#results').html(html);
-
-
-
     var comicCollector = new ComicCollector();
 });
 
@@ -29,8 +18,8 @@ var ComicCollector = function() {
     self.main.on('click','.button-own', function() {
         self.updateOwn($(this).data('id'));
     });
-    self.main.on('click', 'btnSubscribe', function() {
-        self.subscribe($(this).data('id'));
+    self.main.on('click', '.btnSubscribe', function() {
+        self.subscribe($(this).data('id'), $(this).data('title'));
     });
 };
 
@@ -69,8 +58,44 @@ ComicCollector.prototype.searchMarvel = function(searchTerms) {
         });
 };
 
-ComicCollector.prototype.subscribe = function(seriesid) {
+ComicCollector.prototype.subscribe = function(seriesid, title) {
     console.log(seriesid);
+    console.log(title);
+
+    var userid = '5828105cff349d9f38bb946a';
+
+	var itemToAdd = {  'seriesid': seriesid,
+                        'title': title,
+                        'startyear': 2015,
+                        'inprogress': true
+    };
+
+    var url = '/api/users/' + userid + '/subscriptions';
+    console.log(url);
+
+	$.ajax(url, {
+			type:'POST',
+			data: JSON.stringify(itemToAdd),
+			dataType: 'json',
+			contentType: 'application/json'
+		})
+		.fail(function(err) {
+			console.log('Failed to add the item.');
+			console.log(err);
+		})
+		.done(function(data) {
+            // do something on completion
+            // go to collection page
+            console.log(data);
+        });
+
+
+    // gets seriesid
+    // queries marvel for details OR is passed in
+    // builds new sub object
+    // calls ComicCollector API with new subscription - POST
+
+
 };
 
 ComicCollector.prototype.updateNeed = function(seriesid) {
