@@ -17,7 +17,9 @@ templates['searchResults'] = template({"1":function(container,depth0,helpers,par
     + alias4(alias5(((stack1 = (depth0 != null ? depth0.comics : depth0)) != null ? stack1.available : stack1), depth0))
     + "</p>\r\n            <p>Type: "
     + alias4(((helper = (helper = helpers.type || (depth0 != null ? depth0.type : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"type","hash":{},"data":data}) : helper)))
-    + " </p>\r\n        </div>\r\n    </div>\r\n";
+    + " </p>\r\n        </div>\r\n        <div class=\"subscription\">\r\n            <button id=\"btnSubscribe\" type=\"button\" data-id=\""
+    + alias4(((helper = (helper = helpers.id || (depth0 != null ? depth0.id : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"id","hash":{},"data":data}) : helper)))
+    + "\">Subscribe</button>\r\n        </div>\r\n    </div>\r\n";
 },"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1;
 

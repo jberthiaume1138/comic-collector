@@ -29,6 +29,9 @@ var ComicCollector = function() {
     self.main.on('click','.button-own', function() {
         self.updateOwn($(this).data('id'));
     });
+    self.main.on('click', 'btnSubscribe', function() {
+        self.subscribe($(this).data('id'));
+    });
 };
 
 ComicCollector.prototype.renderData = function(data, template, target) {
@@ -64,6 +67,10 @@ ComicCollector.prototype.searchMarvel = function(searchTerms) {
         .done(function(data) {
             self.renderData(data, self.$searchTemplate, self.$searchResultsDiv);
         });
+};
+
+ComicCollector.prototype.subscribe = function(seriesid) {
+    console.log(seriesid);
 };
 
 ComicCollector.prototype.updateNeed = function(seriesid) {
