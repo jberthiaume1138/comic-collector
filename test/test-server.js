@@ -396,15 +396,22 @@ describe('Comic Collector', function() {
 
         it('should edit an item in the user subscriptions on PUT', function(done) {
             chai.request(app)
-                .put('/api/users/' + '58202f0bf4f19536a02e98a5' + '/subscriptions/' + '58202f0bf4f19536a02e98a7') //han solo
+                .put('/api/users/' + '58202f0bf4f19536a02e98a5' + '/subscriptions/' + '58202f0bf4f19536a02e98a7')
                 .send({
                         "inprogress": true,
-                        "startyeard": 1999
+                        "startyear": 1999
                     })
                 .end(function(error, res) {
                     res.should.have.status(200);
                     res.should.be.json;
                     res.body.should.be.an('object');
+                    res.body.should.have.property('UPDATED');
+                    res.body.UPDATED.should.have.property('subscriptions');
+                    res.body.UPDATED.subscriptions.should.be.an('array');
+                    res.body.UPDATED.subscriptions[1].should.have.property('inprogress');
+                    res.body.UPDATED.subscriptions[1].inprogress.should.equal(true);
+                    res.body.UPDATED.subscriptions[1].startyear.should.equal(1999);
+                    // add more tests
                     done();
                 });
         });
