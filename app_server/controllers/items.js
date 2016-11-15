@@ -10,7 +10,7 @@ var hash = crypto.MD5(ts + priv + pub).toString();
 
 var request = require('request');
 
-if(process.env.node) {
+if(process.env.NODE_ENV === 'production') {
     var baseURL = 'https://radiant-peak-89382.herokuapp.com';
 }
 else {
