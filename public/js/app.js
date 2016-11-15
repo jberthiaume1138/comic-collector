@@ -67,7 +67,7 @@ ComicCollector.prototype.subscribe = function(seriesid, title) {
 
     var userid = '5828105cff349d9f38bb946a';
 
-	var itemToAdd = {  'seriesid': seriesid,
+    var itemToAdd = {  'seriesid': seriesid,
                         'title': title,
                         'startyear': 2015,
                         'inprogress': true
