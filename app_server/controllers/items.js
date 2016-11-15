@@ -9,7 +9,14 @@ var ts = new Date().getTime();
 var hash = crypto.MD5(ts + priv + pub).toString();
 
 var request = require('request');
-var baseURL = 'http://localhost:8080'; // add logic for dev/prod env
+
+if(process.env.node) {
+    var baseURL = 'https://radiant-peak-89382.herokuapp.com';
+}
+else {
+    var baseURL = 'http://localhost:8080';
+}
+
 
 module.exports.renderAdmin = function(req, res) {
     // gets the list of registered users and their collections
