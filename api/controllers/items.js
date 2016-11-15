@@ -30,7 +30,54 @@ module.exports.usersList = function(req, res) {
 
 module.exports.usersCreate = function(req, res) {
     // create a new user
-    var dataToAdd = {};
+
+    // username input validation
+    if(!req.body) {
+        sendJSONResponse(res, 400, {message:'No request body'});
+        return;
+    }
+
+    if(!('username' in req.body)) {
+        sendJSONResponse(res, 422, {message: 'Missing field: username'});
+        return;
+    }
+
+    var username = req.body.username;
+
+    if (typeof username !== 'string') {
+        sendJSONResponse(res, 422, {message: 'Incorrect field type: username'});
+        return
+    }
+
+   username = username.trim();
+
+   if (username === '') {
+       sendJSONResponse(res, 422, {message: 'Incorrect field length: username'});
+       return;
+   }
+
+   // password input validation
+   if (!('password' in req.body)) {
+       sendJSONResponse(res, 422, {message: 'Missing field: password'});
+       return;
+   }
+
+   var password = req.body.password;
+
+   if (typeof password !== 'string') {
+       sendJSONResponse(res, 422, {message: 'Incorrect field type: password'});
+       return;
+   }
+
+   password = password.trim();
+
+   if (password === '') {
+       sendJSONResponse(res, 422, {message: 'Incorrect field length: password'});
+       return;
+   }
+
+
+   var dataToAdd = {};
     for (var field in req.body) {
         dataToAdd[field] = req.body[field];
     }
@@ -121,10 +168,6 @@ module.exports.subscriptionsCreate = function(req, res) {
         newSub[field] = req.body[field];
     }
 
-    // as response, send the entire user or
-        // or just the updated sub-document array
-        // or the new subscription object?
-
     user.findById(req.params.userid)
         .then(function(thisUser) {
             thisUser.subscriptions.push(newSub);
@@ -177,8 +220,13 @@ module.exports.subscriptionsUpdateOne = function(req, res) {
                 thisSub[field] = req.body[field];
             }
 
+            // for (var key in req.body) {
+            //     console.log(key, req.body[key]);
+            // }
+
             thisUser.save(thisSub, function(err, updatedUser) {
                 if(err) {
+                    console.log(err);
                     return err;
                 }
                 sendJSONResponse(res, 200, {'UPDATED': updatedUser});
