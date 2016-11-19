@@ -382,7 +382,7 @@ describe('Comic Collector', function() {
 
         it('should add a new item to the user\'s subscriptions on POST', function(done) {
             chai.request(app)
-                .post('/api/users/' + '58202f0bf4f19536a02e98a5' + '/subscriptions')
+                .post('/api/users/' + '58202f0bf4f19536a02e98a5' + '/subscriptions')    // using Homer
                 .send({ "seriesid": 20912,
                         "title": "Black Panther",
                         "startyear": 2016,
@@ -390,7 +390,21 @@ describe('Comic Collector', function() {
                 .end(function(error, res) {
                     res.should.have.status(201);
                     res.should.be.json;
-                    // add more tests later
+                    res.body.should.be.an('object');
+                    res.body.should.have.property('ADDED');
+                    res.body.ADDED.should.be.an('object');
+                    res.body.ADDED.should.have.property('seriesid');
+                    res.body.ADDED.seriesid.should.be.a('number');
+                    res.body.ADDED.seriesid.should.equal(20912);
+                    res.body.ADDED.should.have.property('title');
+                    res.body.ADDED.title.should.be.a('string');
+                    res.body.ADDED.title.should.equal('Black Panther');
+                    res.body.ADDED.should.have.property('startyear');
+                    res.body.ADDED.startyear.should.be.a('number');
+                    res.body.ADDED.startyear.should.equal(2016);
+                    res.body.ADDED.should.have.property('inprogress');
+                    res.body.ADDED.inprogress.should.be.a('Boolean');
+                    res.body.ADDED.inprogress.should.equal(true);
                     done();
                 });
         });
@@ -409,10 +423,18 @@ describe('Comic Collector', function() {
                     res.body.should.have.property('UPDATED');
                     res.body.UPDATED.should.have.property('subscriptions');
                     res.body.UPDATED.subscriptions.should.be.an('array');
-                    res.body.UPDATED.subscriptions[1].should.have.property('inprogress');
-                    res.body.UPDATED.subscriptions[1].inprogress.should.equal(true);
+                    res.body.UPDATED.subscriptions[1].should.have.property('seriesid');
+                    res.body.UPDATED.subscriptions[1].seriesid.should.be.a('number');
+                    res.body.UPDATED.subscriptions[1].seriesid.should.equal(19711);
+                    res.body.UPDATED.subscriptions[1].should.have.property('title');
+                    res.body.UPDATED.subscriptions[1].title.should.be.a('string');
+                    res.body.UPDATED.subscriptions[1].title.should.equal('Han Solo');
+                    res.body.UPDATED.subscriptions[1].should.have.property('startyear');
+                    res.body.UPDATED.subscriptions[1].startyear.should.be.a('number');
                     res.body.UPDATED.subscriptions[1].startyear.should.equal(1999);
-                    // add more tests
+                    res.body.UPDATED.subscriptions[1].should.have.property('inprogress');
+                    res.body.UPDATED.subscriptions[1].inprogress.should.be.a('Boolean');
+                    res.body.UPDATED.subscriptions[1].inprogress.should.equal(true);
                     done();
                 });
         });
@@ -420,13 +442,23 @@ describe('Comic Collector', function() {
         it('should delete an item from the subscriptions on DELETE', function(done) {
             chai.request(app)
                 .delete('/api/users/' + '58202f0bf4f19536a02e98a5' + '/subscriptions/' + '58202f0bf4f19536a02e98a6')
-                .end(function(error, res) {
+                .end(function(err, res) {
                     res.should.have.status(200);
                     res.should.be.json;
                     res.body.should.have.property('REMOVED');
                     res.body.REMOVED.should.be.an('object');
+                    res.body.REMOVED.should.have.property('seriesid');
+                    res.body.REMOVED.seriesid.should.be.a('number');
+                    res.body.REMOVED.seriesid.should.equal(20476);
+                    res.body.REMOVED.should.have.property('title');
+                    res.body.REMOVED.title.should.be.a('string');
+                    res.body.REMOVED.title.should.equal('Invincible Iron Man');
+                    res.body.REMOVED.should.have.property('startyear');
+                    res.body.REMOVED.startyear.should.be.a('number');
+                    res.body.REMOVED.startyear.should.equal(2015);
                     res.body.REMOVED.should.have.property('inprogress');
-                    // add more later
+                    res.body.REMOVED.inprogress.should.be.a('Boolean');
+                    res.body.REMOVED.inprogress.should.equal(true);
                     done();
                 });
         });

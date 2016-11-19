@@ -179,7 +179,7 @@ module.exports.subscriptionsCreate = function(req, res) {
                     return(err);
                 }
                 else {
-                    sendJSONResponse(res, 201, updatedUser);
+                    sendJSONResponse(res, 201, {'ADDED': newSub});
                 }
             });
         })

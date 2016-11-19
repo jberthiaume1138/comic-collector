@@ -1,6 +1,6 @@
 ##Comic Collector
 
-####Comic Collector is a Node/Express/Mongo application to help track a comic book collection.
+####Comic Collector is a Node/Express/MongoDB application to help track a comic book collection.
 
 version 0.1:
 https://radiant-peak-89382.herokuapp.com
